@@ -1,19 +1,55 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  
+  <url>
+    <loc>https://techxero.com/.htaccess</loc>
+  </url>
+  
+  
+  
+  
+  
   <url>
     <loc>https://techxero.com/about/</loc>
-  </url><url>
-    <loc>https://techxero.com/categories/</loc>
-  </url><url>
-    <loc>https://techxero.com/links/</loc>
-  </url><url>
-    <loc>https://techxero.com/tech/</loc>
-  </url><url>
-    <loc>https://techxero.com/tags/</loc>
-  </url><url>
-    <loc>https://techxero.com/</loc>
-  </url><url>
+  </url>
+  
+  
+  
+  <url>
     <loc>https://techxero.com/contact/</loc>
   </url>
+  
+  
+  
+  <url>
+    <loc>https://techxero.com/categories/</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://techxero.com/links/</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://techxero.com/tech/</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://techxero.com/tags/</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://techxero.com/</loc>
+  </url>
+  
+  
 </urlset>

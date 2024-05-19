@@ -4,9 +4,16 @@
     <title>TechXero&#39;s Home on </title>
     <link>https://techxero.com/</link>
     <description>Recent content in TechXero&#39;s Home on </description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <atom:link href="https://techxero.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://techxero.com/.htaccess</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://techxero.com/.htaccess</guid>
+      <description></description>
+    </item>
     <item>
       <title>About</title>
       <link>https://techxero.com/about/</link>
@@ -15,25 +22,25 @@
       <description>A short biography Well, where should I start ? My name’s Steve, A.K.A TechXero/DarkXero, and I am a 44 year old Tech fanatic from Lebanon. I love technology, mainly Computer Hardware/Software, smartphones, and some web-design. I also love many music genres, like all types of Electronic mostly anything with hard bass, classic 80’s, Heavy Metal, Country, among others.&#xA;Films too, especially Art Films by famous Directors like Lars Von Trier, Tarkovsky, Kubrick, Francis Ford Copolla, George Lucas and others.</description>
     </item>
     <item>
+      <title>Blog</title>
+      <link>https://techxero.com/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://techxero.com/contact/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Links</title>
       <link>https://techxero.com/links/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://techxero.com/links/</guid>
-      <description>Useful Links. Throughout the years, I have collected a ton of interesting and useful links, that I would like to share with y&amp;rsquo;all. Maybe they prove to be useful to you as well.&#xA;Linux Related Below is a collection of links related to the world of Linux. If you are like me, you will surely find them interesting, am I right ?&#xA;Here&amp;rsquo;s a list of the top 5 Linux related links.</description>
+      <description>Useful Links. Throughout the years, I have collected a ton of interesting and useful links, that I would like to share with y&amp;rsquo;all. Maybe they prove to be useful to you as well.&#xA;My Fave Distro : Arch Linux My Fave D.E : KDE Plasma Learn Arch Linux : ArcoLinux Docker Containers : Docker Hub My Fave Bootable USB Tool : Ventoy My Private Vault : The Vault </description>
     </item>
     <item>
       <title>Specs</title>
       <link>https://techxero.com/tech/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://techxero.com/tech/</guid>
-      <description>Below are the specs of my main Rig, the one I use to test &amp;amp; build XeroLinux. Also the one I game on and much much more. I have 4 other rigs, will update this page later with more info.</description>
-    </item>
-    <item>
-      <title>vCard</title>
-      <link>https://techxero.com/contact/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://techxero.com/contact/</guid>
-      <description>How To Contact me. There are many ways to contact me. Just make sure to select the right method. I will answer you as fast as I can, all i ask for is a little bit of patience. I will try my best to answer. If I don&amp;rsquo;t, it just means I am either too busy or power is out as it usually is here in Lebanon. ;)&#xA;Linux Related Ok, so, if you want to ask questions related to Linux or more specifically XeroLinux Toolkit, you can do so by either joining the XeroLinux Forum or via the Mastodon instance.</description>
+      <description>Below are the specs of my main Rig, the one I use to test &amp;amp; build XeroLinux. Also the one I game on and much much more. I have 4 other rigs that are less important.</description>
     </item>
   </channel>
 </rss>
