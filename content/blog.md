@@ -1,7 +1,7 @@
 ---
 Title : Blog
 type : "redirect"
-url : "/contact"
+url : "/blog"
 redirect_to : "https://blog.techxero.com"
 redirect_enabled : true
 ---
