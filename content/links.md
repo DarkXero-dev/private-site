@@ -13,4 +13,4 @@ Throughout the years, I have collected a ton of interesting and useful links, th
 - Learn Arch Linux : [**ArchWiki**](https://wiki.archlinux.org)
 - Docker Containers : [**Docker Hub**](https://hub.docker.com/)
 - My Fave Bootable USB Tool : [**Ventoy**](https://github.com/ventoy/Ventoy)
-- My Private Vault : [**The Vault**](https://techxero.com/Vault/)
+- My Private Vault : [**The Vault**](https://vault.techxero.com/)
