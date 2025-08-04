@@ -29,13 +29,22 @@
                     <nav>
                         <ul>
                             {{ range .Pages.ByDate }}
-                                {{if .Title }}
-                                    {{if .Content}}
+                                {{ if .Title }}
+                                    {{ $isRedirect := eq .Type "redirect" }}
+                                    {{ if .Content }}
                                         <li>
-                                            <a href="#{{ cond (in (.Title|urlize) "%") (.Title | base64Encode) (.Title) | urlize }}">{{ .Title }}</a>
+                                            <a href="#{{ cond (in (.Title | urlize) "%") (.Title | base64Encode) (.Title) | urlize }}"
+                                               {{ if $isRedirect }} target="_blank" rel="noopener"{{ end }}>
+                                               {{ .Title }}
+                                            </a>
                                         </li>
                                     {{ else }}
-                                        <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+                                        <li>
+                                            <a href="{{ .Permalink }}"
+                                               {{ if $isRedirect }} target="_blank" rel="noopener"{{ end }}>
+                                               {{ .Title }}
+                                            </a>
+                                        </li>
                                     {{ end }}
                                 {{ end }}
                             {{ end }}
@@ -47,9 +56,9 @@
                 <div id="main">
 
                     {{ range .Pages }}
-                        {{if .Title }}
-                            {{if .Content }}
-                                <article id="{{ cond (in (.Title|urlize) "%") (.Title | base64Encode) (.Title) | urlize }}">
+                        {{ if .Title }}
+                            {{ if .Content }}
+                                <article id="{{ cond (in (.Title | urlize) "%") (.Title | base64Encode) (.Title) | urlize }}">
                                     <h2 class="major">{{ .Title }}</h2>
                                     <span class="image main"><img src="{{ .Params.image }}" alt="" /></span>
                                     {{ .Content }}

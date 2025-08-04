@@ -21,7 +21,7 @@ However, it’s not to say that I will stick with it for good, who knows what th
 
 {{< figure src="https://i.imgur.com/V8UErup.png" alt="Support" class="center-image" >}}<br />
 
-All this is to say that, in essence, I am a *Multi-User*, as in, I don’t stick to one Platform, I like to dabble in all of them. I currently use **iOS** and **Android** when it comes to Smartphones. **macOS**, **Windows** and **Linux** when it comes to *Desktop Operating Systems*. I currently maintain my very own *ArchLinux Toolkik* **[XeroLinux](https://xerolinux.xyz)**.
+All this is to say that, in essence, I am a *Multi-User*, as in, I don’t stick to one Platform, I like to dabble in all of them. I currently use **iOS** and **Android** when it comes to Smartphones. **macOS**, **Windows** and **Linux** when it comes to *Desktop Operating Systems*. I currently maintain my very own *ArchLinux Distro* **[XeroLinux](https://xerolinux.xyz)**.
 
 Other than that, I do freelance as a **Technical Support specialist** from time to time. I have landed a Job at **Apple** in 2019, in **Ireland**. But it didn’t last long unfortunately, can’t go into detail as to why, but at least I can say that I have worked for that company LoL… I am currently unemployed, but it’s OK. I do get by.
 
