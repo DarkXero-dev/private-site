@@ -11,15 +11,15 @@ body {
   background-position: center;
   background-attachment: scroll !important;
   margin: 0;
-  padding-top: 70px; /* 🛡️ Prevent content from hiding behind fixed header */
+  padding: 0; /* ✅ Removed unnecessary padding */
   min-height: 100vh;
 }
 
-/* Make sure site menu (header/nav) is always on top */
+/* Ensure site menu (header/nav) stays on top if fixed/sticky */
 header,
 nav,
 .site-menu {
-  position: relative;   /* or 'fixed'/'sticky' if already defined in your theme */
+  position: relative;   /* Can change to fixed/sticky if needed */
   z-index: 10;
 }
 
@@ -39,8 +39,8 @@ nav,
   border: 1px solid rgba(255, 255, 255, 0.18);
   color: #fff;
 
-  position: relative; /* Required for z-index */
-  z-index: 1;         /* So it stays below the menu */
+  position: relative;
+  z-index: 1;
 }
 
 .postWrapper h1 {
