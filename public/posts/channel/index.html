@@ -75,20 +75,16 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  background-attachment: scroll !important;
   margin: 0;
   min-height: 100vh;
-  background-attachment: scroll !important;
 }
 
 .postWrapper {
-  width: 50vw;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+  width: 90vw;                 
+  max-width: 800px;            
+  margin: 3rem auto;           
   padding: 1rem;
-  margin-top: 3rem;        
-  margin-bottom: 3rem;     
   box-sizing: border-box;
 
   background: rgba(0, 0, 0, 0.5);
@@ -115,13 +111,15 @@ body {
 }
 
  
-.postWrapper h1 {
-  font-size: 1.6rem;
-}
+@media (max-width: 600px) {
+  .postWrapper h1 {
+    font-size: 1.4rem;
+  }
 
-.postMetadata dt,
-.postMetadata dd {
-  font-size: 0.9rem;
+  .postMetadata dt,
+  .postMetadata dd {
+    font-size: 0.85rem;
+  }
 }
 </style>
 
