@@ -71,12 +71,29 @@ Tags | 💻TechXero💻
         <div class="content">
             <main class="main">
                 
-<body style="background-image: url('https://i.imgur.com/3IJUaMB.png');
-             background-repeat: no-repeat;
-             background-size: cover;
-             background-position: center;"></body>
 <style>
+body {
+  background-image: url('https://i.imgur.com/3IJUaMB.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.postListContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 1rem;
+}
+
 .postListItem {
+  width: 90vw;
+  max-width: 800px;
   background: rgba(245, 245, 245, 0.1);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
@@ -85,20 +102,64 @@ Tags | 💻TechXero💻
   border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 20px;
   color: #000;
+  box-sizing: border-box;
+}
+
+.postHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.postTitle {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.postDate {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.postExcerpt p {
+  margin-top: 1rem;
+  line-height: 1.6;
+}
+
+ 
+.listHeader {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.listHeader h1 {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.listContent {
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  padding: 0 1rem;
+  color: #fff;
+  line-height: 1.6;
+  text-align: center;
 }
 </style>
-<div>
-    <div class="listHeader">
-        <h1>Tags</h1>
-    </div>
 
+<body>
+  <div class="listHeader">
+    <h1>Tags</h1>
+  </div>
+
+  
+
+  <div class="postListContainer">
     
-
-    <div>
-        
-    </div>
-</div>
-
+  </div>
+</body>
 
             </main>
         </div>

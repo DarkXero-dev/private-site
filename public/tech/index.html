@@ -69,35 +69,94 @@ Specs | 💻TechXero💻
         <div class="content">
             <main class="main">
                 
-<body style="background-image: url('https://i.imgur.com/3IJUaMB.png');
-             background-repeat: no-repeat;
-             background-size: cover;
-             background-position: center;"></body>
-<div class="postWrapper">
+<style>
+body {
+  background-image: url('https://i.imgur.com/3IJUaMB.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  margin: 0;
+  min-height: 100vh;
+  background-attachment: scroll !important;
+}
+
+.postWrapper {
+  width: 50vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1rem;
+  margin-top: 3rem;        
+  margin-bottom: 3rem;     
+  box-sizing: border-box;
+
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.postWrapper h1 {
+  margin-top: 0;
+  color: #fff;
+}
+
+.postMetadata dt,
+.postMetadata dd {
+  color: #ddd;
+}
+
+.postWrapper p {
+  line-height: 1.6;
+}
+
+ 
+.postWrapper h1 {
+  font-size: 1.6rem;
+}
+
+.postMetadata dt,
+.postMetadata dd {
+  font-size: 0.9rem;
+}
+</style>
+
+<body>
+
+  <div class="postWrapper">
     <h1>Specs</h1>
+
     
-    	<p>My Gear</p>
+      <p>My Gear</p>
     
+
     
     <section class="postMetadata">
-        <dl>
-            
-            
-            
-            
-                <dt>published</dt>
-                
-                <dd><time datetime="2019-02-28">February 28, 2019</time></dd>
-            
-            
-                <dt>reading time</dt>
-                <dd>1 minute</dd>
-            
-        </dl>
+      <dl>
+        
+        
+        
+
+        
+          <dt>published</dt>
+          
+          <dd><time datetime="2019-02-28">February 28, 2019</time></dd>
+        
+
+        
+          <dt>reading time</dt>
+          <dd>1 minute</dd>
+        
+      </dl>
     </section>
     
+
     <div>
-        <figure class="center-image"><img src="https://i.imgur.com/9WxOnPh.jpeg"
+      <figure class="center-image"><img src="https://i.imgur.com/9WxOnPh.jpeg"
     alt="specs">
 </figure>
 
@@ -110,7 +169,9 @@ Specs | 💻TechXero💻
 <p>I am not gonna list the rest of them here, it would be overwhelming, so if you want to dive into the full specs of the other machines I got, and see exactly what I’m working with, check out the <a href="https://xerolinux.xyz/gear/"><strong>XeroLinux Site</strong></a>.</p>
 
     </div>
-</div>
+  </div>
+
+</body>
 
             </main>
         </div>

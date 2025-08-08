@@ -69,35 +69,94 @@ About | 💻TechXero💻
         <div class="content">
             <main class="main">
                 
-<body style="background-image: url('https://i.imgur.com/3IJUaMB.png');
-             background-repeat: no-repeat;
-             background-size: cover;
-             background-position: center;"></body>
-<div class="postWrapper">
+<style>
+body {
+  background-image: url('https://i.imgur.com/3IJUaMB.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  margin: 0;
+  min-height: 100vh;
+  background-attachment: scroll !important;
+}
+
+.postWrapper {
+  width: 50vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1rem;
+  margin-top: 3rem;        
+  margin-bottom: 3rem;     
+  box-sizing: border-box;
+
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.postWrapper h1 {
+  margin-top: 0;
+  color: #fff;
+}
+
+.postMetadata dt,
+.postMetadata dd {
+  color: #ddd;
+}
+
+.postWrapper p {
+  line-height: 1.6;
+}
+
+ 
+.postWrapper h1 {
+  font-size: 1.6rem;
+}
+
+.postMetadata dt,
+.postMetadata dd {
+  font-size: 0.9rem;
+}
+</style>
+
+<body>
+
+  <div class="postWrapper">
     <h1>About</h1>
+
     
-    	<p>Know more about me...</p>
+      <p>Know more about me...</p>
     
+
     
     <section class="postMetadata">
-        <dl>
-            
-            
-            
-            
-                <dt>published</dt>
-                
-                <dd><time datetime="2019-02-28">February 28, 2019</time></dd>
-            
-            
-                <dt>reading time</dt>
-                <dd>2 minutes</dd>
-            
-        </dl>
+      <dl>
+        
+        
+        
+
+        
+          <dt>published</dt>
+          
+          <dd><time datetime="2019-02-28">February 28, 2019</time></dd>
+        
+
+        
+          <dt>reading time</dt>
+          <dd>2 minutes</dd>
+        
+      </dl>
     </section>
     
+
     <div>
-        <h2 id="a-short-biography">A short biography</h2>
+      <h2 id="a-short-biography">A short biography</h2>
 <p>Well, where should I start ? My name’s <strong>Steve</strong>, A.K.A <strong>TechXero/DarkXero</strong>, and I am a 44 year old Tech fanatic from <strong>Lebanon</strong>. I love technology, mainly Computer Hardware/Software, smartphones, and some web-design. I also love many music genres, like all types of Electronic mostly anything with hard bass, classic 80’s, Heavy Metal, Country, among others.</p>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
       <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/NsBiI-LyVm4?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
@@ -124,7 +183,9 @@ However, it’s not to say that I will stick with it for good, who knows what th
 <p>Cheers y&rsquo;all 😀</p>
 
     </div>
-</div>
+  </div>
+
+</body>
 
             </main>
         </div>

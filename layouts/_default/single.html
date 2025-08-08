@@ -1,43 +1,104 @@
-{{ define "title"}}
+{{ define "title" }}
 {{ .Title }} | {{ .Site.Params.author.name }}
 {{ end }}
 
 {{ define "main" }}
-<body style="background-image: url('https://i.imgur.com/3IJUaMB.png');
-             background-repeat: no-repeat;
-             background-size: cover;
-             background-position: center;"></body>
-<div class="postWrapper">
+<style>
+body {
+  background-image: url('https://i.imgur.com/3IJUaMB.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  margin: 0;
+  min-height: 100vh;
+  background-attachment: scroll !important;
+}
+
+.postWrapper {
+  width: 50vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1rem;
+  margin-top: 3rem;       /* ⬅️ Add spacing from top (header) */
+  margin-bottom: 3rem;    /* ⬅️ Add spacing from bottom (footer) */
+  box-sizing: border-box;
+
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.postWrapper h1 {
+  margin-top: 0;
+  color: #fff;
+}
+
+.postMetadata dt,
+.postMetadata dd {
+  color: #ddd;
+}
+
+.postWrapper p {
+  line-height: 1.6;
+}
+
+/* Responsive */
+.postWrapper h1 {
+  font-size: 1.6rem;
+}
+
+.postMetadata dt,
+.postMetadata dd {
+  font-size: 0.9rem;
+}
+</style>
+
+<body>
+
+  <div class="postWrapper">
     <h1>{{ .Title }}</h1>
-    {{ if .Description}}
-    	<p>{{.Description}}</p>
+
+    {{ if .Description }}
+      <p>{{ .Description }}</p>
     {{ end }}
+
     {{ if .Params.showMetadata | default true }}
     <section class="postMetadata">
-        <dl>
-            {{ with .GetTerms "tags" }}
-                {{ partial "taxonomy/tags.html" . }}
-            {{ end }}
-            {{ with .GetTerms "authors" }}
-                {{ partial "taxonomy/authors.html" . }}
-            {{ end }}
-            {{ with .GetTerms "categories" }}
-                {{ partial "taxonomy/categories.html" . }}
-            {{ end }}
-            {{ if .Site.Params.published | default true }}
-                <dt>{{ i18n "published" }}</dt>
-                {{ $formattedDate := .Date.Format "2006-01-02" }}
-                <dd><time datetime="{{ $formattedDate }}">{{ .Date | time.Format ":date_long" }}</time></dd>
-            {{ end }}
-            {{ if .Site.Params.readingTime | default true }}
-                <dt>{{ i18n "reading_time" }}</dt>
-                <dd>{{ i18n "reading_time_desc" .ReadingTime }}</dd>
-            {{ end }}
-        </dl>
+      <dl>
+        {{ with .GetTerms "tags" }}
+          {{ partial "taxonomy/tags.html" . }}
+        {{ end }}
+        {{ with .GetTerms "authors" }}
+          {{ partial "taxonomy/authors.html" . }}
+        {{ end }}
+        {{ with .GetTerms "categories" }}
+          {{ partial "taxonomy/categories.html" . }}
+        {{ end }}
+
+        {{ if .Site.Params.published | default true }}
+          <dt>{{ i18n "published" }}</dt>
+          {{ $formattedDate := .Date.Format "2006-01-02" }}
+          <dd><time datetime="{{ $formattedDate }}">{{ .Date | time.Format ":date_long" }}</time></dd>
+        {{ end }}
+
+        {{ if .Site.Params.readingTime | default true }}
+          <dt>{{ i18n "reading_time" }}</dt>
+          <dd>{{ i18n "reading_time_desc" .ReadingTime }}</dd>
+        {{ end }}
+      </dl>
     </section>
     {{ end }}
+
     <div>
-        {{ .Content }}
+      {{ .Content }}
     </div>
-</div>
+  </div>
+
+</body>
 {{ end }}
