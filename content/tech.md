@@ -12,7 +12,9 @@ I have a ridiculous number of machines covering everything from high-powered dev
 
 **The Beast :**
 
-This is my main rig, the one I do all my *Development*, *Gaming* and other things on, which I label as **StationXero**. It runs **XeroLinux** in dual boot with **Windows 11**. I use the former 99% of the time and the latter 1% only to play games, which I rarely do since am so busy. Reason I prefer gaming on **Windows** is because I like using *Trainers*. Not gonna describe what those are here, just *Google it* as the saying goes.
+This is my main rig, the one I do all my *Development*, *Gaming* and other things on, which I label as **StationXero**. It runs **XeroLinux** in dual boot with **Windows 11**.
+
+I use the former 99% of the time and the latter 1% only to play games, which I rarely do since am so busy. Reason I prefer gaming on **Windows** is because I like using *Trainers*. Not gonna describe what those are here, just *Google it* as the saying goes.
 
 ![SationXero](https://i.imgur.com/2C387dA.png)
 
