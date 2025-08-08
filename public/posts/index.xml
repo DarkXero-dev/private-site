@@ -1,88 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title></title>
-    <link>/posts/</link>
-    <description> (Posts)</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Posts on </title>
+    <link>https://techxero.com/posts/</link>
+    <description>Recent content in Posts on </description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    
-      
-        <managingEditor>info@techxero.com
-          
-            (💻TechXero💻)
-          
-        </managingEditor>
-      
-
-      
-    
-
-    
+    <managingEditor>info@techxero.com (💻TechXero💻)</managingEditor>
+    <webMaster>info@techxero.com (💻TechXero💻)</webMaster>
     <lastBuildDate>Fri, 08 Aug 2025 00:00:00 +0000</lastBuildDate>
-    
-    <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="https://techxero.com/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Major Refactor</title>
-      <link>/posts/refactor/</link>
-      <pubDate>Fri, 08 Aug 2025 00:00:00 +0000</pubDate>
-      <author>info@techxero.com (💻TechXero💻)</author>
-      <guid>/posts/refactor/</guid>
-      <description>&lt;h2 id=&#34;new-design&#34;&gt;New Design&lt;/h2&gt;
-&lt;p&gt;After rocking the same old, now &lt;em&gt;deprecated&lt;/em&gt; &lt;strong&gt;Hugo Theme&lt;/strong&gt; for what feels like forever, I finally decided it’s time to shake things up. I switched to a theme that’s still actively maintained. Sure, it might not be as flashy or &lt;em&gt;sexy&lt;/em&gt; as the old one, but man, it’s way easier to keep in shape.&lt;/p&gt;
-&lt;p&gt;I’m a big fan of &lt;strong&gt;Hugo&lt;/strong&gt;, so no chance I’m ever dropping it.&lt;/p&gt;
-&lt;h2 id=&#34;main-problem&#34;&gt;Main Problem&lt;/h2&gt;
-&lt;p&gt;Here’s the kicker though, I just can’t seem to find a ton of cool themes for Hugo. The ones on the official &lt;a href=&#34;https://themes.gohugo.io&#34;&gt;&lt;strong&gt;Hugo Themes&lt;/strong&gt;&lt;/a&gt; site are mostly basic and kinda ancient. It’s like searching for a unicorn in a haystack when you want something fresh and modern.&lt;/p&gt;
-&lt;p&gt;So, if any of you have stumbled across a clean, simple, and up-to-date Hugo theme, please throw it my way!&lt;/p&gt;
-&lt;p&gt;Oh, and don’t bother suggesting the &lt;a href=&#34;https://blowfish.page/&#34;&gt;&lt;strong&gt;Blowfish Theme&lt;/strong&gt;&lt;/a&gt;. I’m already using that on &lt;a href=&#34;https://xerolinux.xyz&#34;&gt;&lt;strong&gt;XeroLinux&lt;/strong&gt;&lt;/a&gt;, and it’s just not what I’m hunting for.&lt;/p&gt;
-&lt;h2 id=&#34;wrapping-it-up&#34;&gt;Wrapping It Up&lt;/h2&gt;
-&lt;p&gt;Switching up my theme feels like upgrading my rig—sometimes less flashy but smoother and way more reliable. Hugo rocks, but finding fresh themes? Not so much yet. So, if you’ve got any secret gems hiding in the wild, let’s geek out together and share the love!&lt;/p&gt;</description>
-      <content>&lt;h2 id=&#34;new-design&#34;&gt;New Design&lt;/h2&gt;
-&lt;p&gt;After rocking the same old, now &lt;em&gt;deprecated&lt;/em&gt; &lt;strong&gt;Hugo Theme&lt;/strong&gt; for what feels like forever, I finally decided it’s time to shake things up. I switched to a theme that’s still actively maintained. Sure, it might not be as flashy or &lt;em&gt;sexy&lt;/em&gt; as the old one, but man, it’s way easier to keep in shape.&lt;/p&gt;
-&lt;p&gt;I’m a big fan of &lt;strong&gt;Hugo&lt;/strong&gt;, so no chance I’m ever dropping it.&lt;/p&gt;
-&lt;h2 id=&#34;main-problem&#34;&gt;Main Problem&lt;/h2&gt;
-&lt;p&gt;Here’s the kicker though, I just can’t seem to find a ton of cool themes for Hugo. The ones on the official &lt;a href=&#34;https://themes.gohugo.io&#34;&gt;&lt;strong&gt;Hugo Themes&lt;/strong&gt;&lt;/a&gt; site are mostly basic and kinda ancient. It’s like searching for a unicorn in a haystack when you want something fresh and modern.&lt;/p&gt;
-&lt;p&gt;So, if any of you have stumbled across a clean, simple, and up-to-date Hugo theme, please throw it my way!&lt;/p&gt;
-&lt;p&gt;Oh, and don’t bother suggesting the &lt;a href=&#34;https://blowfish.page/&#34;&gt;&lt;strong&gt;Blowfish Theme&lt;/strong&gt;&lt;/a&gt;. I’m already using that on &lt;a href=&#34;https://xerolinux.xyz&#34;&gt;&lt;strong&gt;XeroLinux&lt;/strong&gt;&lt;/a&gt;, and it’s just not what I’m hunting for.&lt;/p&gt;
-&lt;h2 id=&#34;wrapping-it-up&#34;&gt;Wrapping It Up&lt;/h2&gt;
-&lt;p&gt;Switching up my theme feels like upgrading my rig—sometimes less flashy but smoother and way more reliable. Hugo rocks, but finding fresh themes? Not so much yet. So, if you’ve got any secret gems hiding in the wild, let’s geek out together and share the love!&lt;/p&gt;</content>
+      <link>https://techxero.com/posts/refactor/</link>
+      <pubDate>Fri, 08 Aug 2025 00:00:00 +0000</pubDate><author>info@techxero.com (💻TechXero💻)</author>
+      <guid>https://techxero.com/posts/refactor/</guid>
+      <description>&lt;h2 id=&#34;new-design&#34;&gt;New Design&lt;/h2&gt;&#xA;&lt;p&gt;After rocking the same old, now &lt;em&gt;deprecated&lt;/em&gt; &lt;strong&gt;Hugo Theme&lt;/strong&gt; for what feels like forever, I finally decided it’s time to shake things up. I switched to a theme that’s still actively maintained. Sure, it might not be as flashy or &lt;em&gt;sexy&lt;/em&gt; as the old one, but man, it’s way easier to keep in shape.&lt;/p&gt;&#xA;&lt;p&gt;I’m a big fan of &lt;strong&gt;Hugo&lt;/strong&gt;, so no chance I’m ever dropping it.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>YouTube</title>
-      <link>/posts/channel/</link>
-      <pubDate>Fri, 08 Aug 2025 00:00:00 +0000</pubDate>
-      <author>info@techxero.com (💻TechXero💻)</author>
-      <guid>/posts/channel/</guid>
-      <description>&lt;h2 id=&#34;information&#34;&gt;Information&lt;/h2&gt;
-&lt;p&gt;I’m excited to share that I have created a brand new &lt;strong&gt;YouTube Channel&lt;/strong&gt; where I will be uploading &lt;em&gt;IRL Updates&lt;/em&gt;, real, unfiltered moments from my life. I’ve already uploaded the very first video, and I want to be honest with you: making that video was incredibly challenging. It wasn’t just about hitting the record button, it was about opening up and talking about some uncomfortable, deeply personal subjects. In doing so, I really laid myself bare, exposing parts of my story that I don’t usually share.&lt;/p&gt;
-&lt;p&gt;This channel is more than just a place for videos; it’s a space where I hope to connect on a genuine level, to be vulnerable, and to explore life’s ups and downs with all of you. I appreciate your support as I take this journey, and I can’t wait to share more real moments with you along the way.&lt;/p&gt;
-&lt;p&gt;Read on to know more&amp;hellip;&lt;/p&gt;
-&lt;h2 id=&#34;life-in-lebanon-challenges-beyond-the-screen&#34;&gt;Life in Lebanon: Challenges Beyond the Screen&lt;/h2&gt;
-&lt;p&gt;Living in Lebanon has been incredibly difficult, especially in recent years. I used to work for &lt;strong&gt;Apple&lt;/strong&gt; in &lt;strong&gt;Ireland&lt;/strong&gt;, but even then, I struggled with depression and financial difficulties because of the high cost of living. After the &lt;strong&gt;Beirut port explosion&lt;/strong&gt; in 2019, I tried to take leave to support my family, but that was a challenge in itself.&lt;/p&gt;
-&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/wlk_NLJO3lM?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
-    &lt;/div&gt;
-
-&lt;p&gt;I remember hearing the explosion live as I was on the phone with my father, it was a terrifying and traumatic moment. Eventually, I returned home despite the currency devaluation, which wiped out more than 90% of the Lebanese pound’s value and cut salaries drastically. Finding work locally has been almost impossible despite my experience, and everyday life has only gotten harder.&lt;/p&gt;
-&lt;h2 id=&#34;a-positive-outlook&#34;&gt;A Positive Outlook&lt;/h2&gt;
-&lt;p&gt;Through every hardship, I hold onto the belief that persistence and honesty can pave the way for better days. My journey is far from over, and every small step forward is a victory worth celebrating. I am grateful for the support I have received so far and hopeful for the future, that creativity, community, and courage can thrive even in the toughest circumstances. Together, we can keep building, connecting, and growing, turning challenges into opportunities for meaningful change.&lt;/p&gt;</description>
-      <content>&lt;h2 id=&#34;information&#34;&gt;Information&lt;/h2&gt;
-&lt;p&gt;I’m excited to share that I have created a brand new &lt;strong&gt;YouTube Channel&lt;/strong&gt; where I will be uploading &lt;em&gt;IRL Updates&lt;/em&gt;, real, unfiltered moments from my life. I’ve already uploaded the very first video, and I want to be honest with you: making that video was incredibly challenging. It wasn’t just about hitting the record button, it was about opening up and talking about some uncomfortable, deeply personal subjects. In doing so, I really laid myself bare, exposing parts of my story that I don’t usually share.&lt;/p&gt;
-&lt;p&gt;This channel is more than just a place for videos; it’s a space where I hope to connect on a genuine level, to be vulnerable, and to explore life’s ups and downs with all of you. I appreciate your support as I take this journey, and I can’t wait to share more real moments with you along the way.&lt;/p&gt;
-&lt;p&gt;Read on to know more&amp;hellip;&lt;/p&gt;
-&lt;h2 id=&#34;life-in-lebanon-challenges-beyond-the-screen&#34;&gt;Life in Lebanon: Challenges Beyond the Screen&lt;/h2&gt;
-&lt;p&gt;Living in Lebanon has been incredibly difficult, especially in recent years. I used to work for &lt;strong&gt;Apple&lt;/strong&gt; in &lt;strong&gt;Ireland&lt;/strong&gt;, but even then, I struggled with depression and financial difficulties because of the high cost of living. After the &lt;strong&gt;Beirut port explosion&lt;/strong&gt; in 2019, I tried to take leave to support my family, but that was a challenge in itself.&lt;/p&gt;
-&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/wlk_NLJO3lM?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
-    &lt;/div&gt;
-
-&lt;p&gt;I remember hearing the explosion live as I was on the phone with my father, it was a terrifying and traumatic moment. Eventually, I returned home despite the currency devaluation, which wiped out more than 90% of the Lebanese pound’s value and cut salaries drastically. Finding work locally has been almost impossible despite my experience, and everyday life has only gotten harder.&lt;/p&gt;
-&lt;h2 id=&#34;a-positive-outlook&#34;&gt;A Positive Outlook&lt;/h2&gt;
-&lt;p&gt;Through every hardship, I hold onto the belief that persistence and honesty can pave the way for better days. My journey is far from over, and every small step forward is a victory worth celebrating. I am grateful for the support I have received so far and hopeful for the future, that creativity, community, and courage can thrive even in the toughest circumstances. Together, we can keep building, connecting, and growing, turning challenges into opportunities for meaningful change.&lt;/p&gt;</content>
+      <link>https://techxero.com/posts/channel/</link>
+      <pubDate>Fri, 08 Aug 2025 00:00:00 +0000</pubDate><author>info@techxero.com (💻TechXero💻)</author>
+      <guid>https://techxero.com/posts/channel/</guid>
+      <description>&lt;h2 id=&#34;information&#34;&gt;Information&lt;/h2&gt;&#xA;&lt;p&gt;I’m excited to share that I have created a brand new &lt;strong&gt;YouTube Channel&lt;/strong&gt; where I will be uploading &lt;em&gt;IRL Updates&lt;/em&gt;, real, unfiltered moments from my life. I’ve already uploaded the very first video, and I want to be honest with you: making that video was incredibly challenging. It wasn’t just about hitting the record button, it was about opening up and talking about some uncomfortable, deeply personal subjects. In doing so, I really laid myself bare, exposing parts of my story that I don’t usually share.&lt;/p&gt;&#xA;&lt;p&gt;This channel is more than just a place for videos; it’s a space where I hope to connect on a genuine level, to be vulnerable, and to explore life’s ups and downs with all of you. I appreciate your support as I take this journey, and I can’t wait to share more real moments with you along the way.&lt;/p&gt;&#xA;&lt;p&gt;Read on to know more&amp;hellip;&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>
