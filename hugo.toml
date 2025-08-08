@@ -1,5 +1,6 @@
 baseURL = 'https://techxero.com/'
 languageCode = 'en-us'
+title = "TechXero's Home"
 theme = "nightfall"
 
 [markup]
@@ -28,7 +29,6 @@ hostname = "Home"
   [params.author]
     name = "💻TechXero💻"  # Website and RSS feed author
     email = "info@techxero.com"  # RSS feed email address
-
 
 readingTime = false  # Show reading time on post page
 published = false  # Show published data on post page
