@@ -11,17 +11,23 @@ body {
   background-position: center;
   background-attachment: fixed;
   margin: 0;
-  padding-top: 70px; /* 🛡️ Add space for fixed header if needed */
+  padding: 0;  /* ✅ No extra space at top */
   min-height: 100vh;
 }
 
-/* Make sure menu (if fixed/sticky) appears above everything else */
+/* Make sure menu stays above cards */
 header,
 nav,
 .site-menu {
-  position: relative; /* Or 'fixed'/'sticky' depending on layout */
+  position: relative;  /* Or 'fixed' if needed */
   z-index: 10;
 }
+
+/* Optional: if menu is fixed AND overlaps, uncomment this:
+body {
+  padding-top: 70px;
+}
+*/
 
 .listHeader {
   text-align: center;

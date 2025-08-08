@@ -6,6 +6,6 @@ author = "TechXero"
 
 <div style="text-align: center;">
 
-## 🛜 [Subscribe To RSS Feed](/posts/index.xml) 🛜
+### 🛜 [Subscribe To RSS Feed](/posts/index.xml) 🛜
 
 </div>
