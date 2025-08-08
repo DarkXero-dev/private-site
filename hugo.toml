@@ -18,13 +18,8 @@ theme = "nightfall"
     url = "about"
 
   [[menu.header]]
-    name = "links"
-    weight = 2
-    url = "links"
-
-  [[menu.header]]
     name = "specs"
-    weight = 3
+    weight = 2
     url = "tech"
 
 [params]
@@ -58,3 +53,10 @@ name = "Linkedin"
 url = "https://linkedin.com/in/schaanine"
 target = "_blank"
 aria = "LinkedIn Profile"
+
+[[params.social]]
+key = 3
+name = "YouTube"
+url = "https://www.youtube.com/@TechXeroLB"
+target = "_blank"
+aria = "YouTube Channel"
