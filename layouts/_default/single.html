@@ -11,13 +11,23 @@ body {
   background-position: center;
   background-attachment: scroll !important;
   margin: 0;
+  padding-top: 70px; /* 🛡️ Prevent content from hiding behind fixed header */
   min-height: 100vh;
 }
 
+/* Make sure site menu (header/nav) is always on top */
+header,
+nav,
+.site-menu {
+  position: relative;   /* or 'fixed'/'sticky' if already defined in your theme */
+  z-index: 10;
+}
+
+/* Content wrapper */
 .postWrapper {
-  width: 90vw;                /* ✅ responsive width on mobile */
-  max-width: 800px;           /* ✅ limit width on large screens */
-  margin: 3rem auto;          /* ✅ top/bottom spacing & centered */
+  width: 90vw;
+  max-width: 800px;
+  margin: 3rem auto;
   padding: 1rem;
   box-sizing: border-box;
 
@@ -28,6 +38,9 @@ body {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
   border: 1px solid rgba(255, 255, 255, 0.18);
   color: #fff;
+
+  position: relative; /* Required for z-index */
+  z-index: 1;         /* So it stays below the menu */
 }
 
 .postWrapper h1 {
@@ -44,7 +57,7 @@ body {
   line-height: 1.6;
 }
 
-/* Optional: Slight font scaling for mobile */
+/* Responsive tweaks */
 @media (max-width: 600px) {
   .postWrapper h1 {
     font-size: 1.4rem;

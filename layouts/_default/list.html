@@ -11,8 +11,40 @@ body {
   background-position: center;
   background-attachment: fixed;
   margin: 0;
-  padding: 0;
+  padding-top: 70px; /* 🛡️ Add space for fixed header if needed */
   min-height: 100vh;
+}
+
+/* Make sure menu (if fixed/sticky) appears above everything else */
+header,
+nav,
+.site-menu {
+  position: relative; /* Or 'fixed'/'sticky' depending on layout */
+  z-index: 10;
+}
+
+.listHeader {
+  text-align: center;
+  margin-top: 2rem;
+  z-index: 1;
+  position: relative;
+}
+
+.listHeader h1 {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.listContent {
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  padding: 0 1rem;
+  color: #fff;
+  line-height: 1.6;
+  text-align: center;
+  z-index: 1;
+  position: relative;
 }
 
 .postListContainer {
@@ -21,6 +53,9 @@ body {
   align-items: center;
   gap: 2rem;
   padding: 2rem 1rem;
+
+  z-index: 1;
+  position: relative;
 }
 
 .postListItem {
@@ -35,6 +70,9 @@ body {
   padding: 20px;
   color: #000;
   box-sizing: border-box;
+
+  z-index: 1;
+  position: relative;
 }
 
 .postHeader {
@@ -57,27 +95,6 @@ body {
 .postExcerpt p {
   margin-top: 1rem;
   line-height: 1.6;
-}
-
-/* Make headers and content look good on all devices */
-.listHeader {
-  text-align: center;
-  margin-top: 2rem;
-}
-
-.listHeader h1 {
-  font-size: 2rem;
-  color: #fff;
-  margin-bottom: 1rem;
-}
-
-.listContent {
-  max-width: 800px;
-  margin: 0 auto 2rem;
-  padding: 0 1rem;
-  color: #fff;
-  line-height: 1.6;
-  text-align: center;
 }
 </style>
 

@@ -79,8 +79,40 @@ body {
   background-position: center;
   background-attachment: fixed;
   margin: 0;
-  padding: 0;
+  padding-top: 70px;  
   min-height: 100vh;
+}
+
+ 
+header,
+nav,
+.site-menu {
+  position: relative;  
+  z-index: 10;
+}
+
+.listHeader {
+  text-align: center;
+  margin-top: 2rem;
+  z-index: 1;
+  position: relative;
+}
+
+.listHeader h1 {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.listContent {
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  padding: 0 1rem;
+  color: #fff;
+  line-height: 1.6;
+  text-align: center;
+  z-index: 1;
+  position: relative;
 }
 
 .postListContainer {
@@ -89,6 +121,9 @@ body {
   align-items: center;
   gap: 2rem;
   padding: 2rem 1rem;
+
+  z-index: 1;
+  position: relative;
 }
 
 .postListItem {
@@ -103,6 +138,9 @@ body {
   padding: 20px;
   color: #000;
   box-sizing: border-box;
+
+  z-index: 1;
+  position: relative;
 }
 
 .postHeader {
@@ -125,27 +163,6 @@ body {
 .postExcerpt p {
   margin-top: 1rem;
   line-height: 1.6;
-}
-
- 
-.listHeader {
-  text-align: center;
-  margin-top: 2rem;
-}
-
-.listHeader h1 {
-  font-size: 2rem;
-  color: #fff;
-  margin-bottom: 1rem;
-}
-
-.listContent {
-  max-width: 800px;
-  margin: 0 auto 2rem;
-  padding: 0 1rem;
-  color: #fff;
-  line-height: 1.6;
-  text-align: center;
 }
 </style>
 
