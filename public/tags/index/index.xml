@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Index on </title>
+    <link>https://techxero.com/tags/index/</link>
+    <description>Recent content in Index on </description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <managingEditor>info@techxero.com (💻TechXero💻)</managingEditor>
+    <webMaster>info@techxero.com (💻TechXero💻)</webMaster>
+    <lastBuildDate>Fri, 08 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://techxero.com/tags/index/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Posts</title>
+      <link>https://techxero.com/posts/</link>
+      <pubDate>Fri, 08 Aug 2025 00:00:00 +0000</pubDate><author>info@techxero.com (💻TechXero💻)</author>
+      <guid>https://techxero.com/posts/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

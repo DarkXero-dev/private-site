@@ -1,25 +1,29 @@
----
-title: About
----
++++
+title = "About"
+description = "Know more about me..."
+date = "2019-02-28"
+aliases = ["about-us", "about-hugo", "contact"]
+author = "TechXero"
++++
 
 ## A short biography
 
 Well, where should I start ? My name’s **Steve**, A.K.A **TechXero/DarkXero**, and I am a 44 year old Tech fanatic from **Lebanon**. I love technology, mainly Computer Hardware/Software, smartphones, and some web-design. I also love many music genres, like all types of Electronic mostly anything with hard bass, classic 80’s, Heavy Metal, Country, among others.
 
-{{< youtube NsBiI-LyVm4 >}}<br />
+{{< youtube NsBiI-LyVm4 >}}
 
 Films too, especially Art Films by famous Directors like **Lars Von Trier**, **Tarkovsky**, **Kubrick**, **Francis Ford Copolla**, **George Lucas** and others.
 
-{{< youtube 6IZGwvxhXvw >}}<br />
+{{< youtube 6IZGwvxhXvw >}}
 
 Now, don’t get me wrong, I do like some of the commercial movies coming out today, but not all. These days they tend to do remakes rather than come up with new stuff…
 
-{{< figure src="https://i.imgur.com/gu80XY3.png" alt="Support" class="center-image" >}}<br />
+{{< figure src="https://i.imgur.com/gu80XY3.png" alt="Support" class="center-image" >}}
 
 I am an avid **iOS** user when it comes to smartphones. I did use **Android** for 5 years, was happy on it for a while, I moved to **iOS** and have been a happy man ever since.
 However, it’s not to say that I will stick with it for good, who knows what the future holds? I might go back to **Android**.. I use both in parallel now see where I will land…
 
-{{< figure src="https://i.imgur.com/V8UErup.png" alt="Support" class="center-image" >}}<br />
+{{< figure src="https://i.imgur.com/V8UErup.png" alt="Support" class="center-image" >}}
 
 All this is to say that, in essence, I am a *Multi-User*, as in, I don’t stick to one Platform, I like to dabble in all of them. I currently use **iOS** and **Android** when it comes to Smartphones. **macOS**, **Windows** and **Linux** when it comes to *Desktop Operating Systems*. I currently maintain my very own *ArchLinux Distro* **[XeroLinux](https://xerolinux.xyz)**.
 

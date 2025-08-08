@@ -1,3 +1,60 @@
 baseURL = 'https://techxero.com/'
 languageCode = 'en-us'
-theme = ["hugo-redirect", "dimension"]
+theme = "nightfall"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[menu]
+  [[menu.header]]
+    name = "blog"
+    weight = 0
+    url = "posts"
+  [[menu.header]]
+    name = "about"
+    weight = 1
+    url = "about"
+
+  [[menu.header]]
+    name = "links"
+    weight = 2
+    url = "links"
+
+  [[menu.header]]
+    name = "specs"
+    weight = 3
+    url = "tech"
+
+[params]
+user = "TechXero"
+hostname = "Home"
+  [params.author]
+    name = "💻TechXero💻"  # Website and RSS feed author
+    email = "info@techxero.com"  # RSS feed email address
+
+
+readingTime = false  # Show reading time on post page
+published = false  # Show published data on post page
+
+[[params.social]]
+key = 0
+name = "Github"
+url = "https://github.com/DarkXero-dev"
+target = "_blank"
+aria = "GitHub Profile"
+
+[[params.social]]
+key = 1
+name = "Mastodon"
+url = "https://mastodon.social/@TechXero"
+target = "_blank"
+aria = "Mastodon Profile"
+
+[[params.social]]
+key = 2
+name = "Linkedin"
+url = "https://linkedin.com/in/schaanine"
+target = "_blank"
+aria = "LinkedIn Profile"

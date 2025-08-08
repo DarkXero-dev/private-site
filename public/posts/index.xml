@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on </title>
+    <link>https://techxero.com/posts/</link>
+    <description>Recent content in Posts on </description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <managingEditor>info@techxero.com (💻TechXero💻)</managingEditor>
+    <webMaster>info@techxero.com (💻TechXero💻)</webMaster>
+    <lastBuildDate>Fri, 08 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://techxero.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Major Refactor</title>
+      <link>https://techxero.com/posts/refactor/</link>
+      <pubDate>Fri, 08 Aug 2025 00:00:00 +0000</pubDate><author>info@techxero.com (💻TechXero💻)</author>
+      <guid>https://techxero.com/posts/refactor/</guid>
+      <description>&lt;h2 id=&#34;new-design&#34;&gt;New Design&lt;/h2&gt;&#xA;&lt;p&gt;After rocking the same old, now &lt;em&gt;deprecated&lt;/em&gt; &lt;strong&gt;Hugo Theme&lt;/strong&gt; for what feels like forever, I finally decided it’s time to shake things up. I switched to a theme that’s still actively maintained. Sure, it might not be as flashy or &lt;em&gt;sexy&lt;/em&gt; as the old one, but man, it’s way easier to keep in shape.&lt;/p&gt;&#xA;&lt;p&gt;I’m a big fan of &lt;strong&gt;Hugo&lt;/strong&gt;, so no chance I’m ever dropping it.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
