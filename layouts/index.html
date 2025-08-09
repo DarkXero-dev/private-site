@@ -13,11 +13,10 @@
     header,
     nav,
     .site-menu {
-      position: relative;   /* keep your theme behavior (fixed/sticky okay too) */
-      z-index: 5000;        /* higher than any page content */
+      position: relative;
+      z-index: 5000;
     }
 
-    /* Avoid unnecessary stacking contexts on content */
     .hero {
       display: flex;
       flex-direction: column;
@@ -25,8 +24,6 @@
       gap: 12px;
       margin-top: 10px;
       text-align: center;
-      position: relative;   /* needed for local positioning, but no z-index */
-      z-index: auto;
     }
 
     .logo {
@@ -35,13 +32,11 @@
       filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
     }
 
-    /* Title: RGB animation + heavy drop shadow + thin semi-transparent stroke */
+    /* Title: RGB animation + stroke + drop shadow */
     .title-box {
       padding: 0;
       background: transparent;
       box-shadow: none;
-      position: relative;
-      z-index: auto;        /* don't compete with header */
     }
 
     .title-box .indexHeader {
@@ -49,28 +44,14 @@
       font-size: 2.6rem;
       font-weight: 900;
       letter-spacing: 0.4px;
-
-      /* Animated gradient text */
-      background-image: linear-gradient(
-        90deg,
-        #ff004c,
-        #ffbf00,
-        #21ff00,
-        #00e5ff,
-        #7a00ff,
-        #ff004c
-      );
+      background-image: linear-gradient(90deg, #ff004c, #ffbf00, #21ff00, #00e5ff, #7a00ff, #ff004c);
       background-size: 400% 100%;
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: rgbCycle 12s linear infinite;
-
-      /* Thin semi-transparent black stroke */
       -webkit-text-stroke: 0.75px rgba(0, 0, 0, 0.9);
-
-      /* Heavy outer drop shadow (valid blur value) */
-      text-shadow: 2px 4px -2px rgba(255, 255, 255, 0.5);
+      text-shadow: 2px 4px -2px rgba(0, 0, 0, 0.5);
     }
 
     @keyframes rgbCycle {
@@ -80,13 +61,18 @@
 
     /* Socials */
     .social-wrapper {
-      margin-top: 6px;
+      margin-top: 8px;
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .social-row {
+      display: flex;
+      gap: 10px;
       justify-content: center;
-      gap: 8px;
-      position: relative;
-      z-index: auto;        /* below header */
+      flex-wrap: wrap;
     }
 
     .social-box {
@@ -98,7 +84,13 @@
       box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
       display: inline-flex;
       align-items: center;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+
+    /* GitHub: fixed but not too wide */
+    .github-box {
+      width: 120px;        /* was 180px; narrowed per your request */
+      justify-content: center;
     }
 
     .social-box a {
@@ -106,8 +98,17 @@
       text-decoration: none;
       font-size: 1.05rem;
       font-weight: 600;
-      letter-spacing: 0.2px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    }
+
+    /* SVG icon images */
+    .social-icon {
+      width: 1.2em;
+      height: 1.2em;
+      display: inline-block;
     }
 
     .social-box:hover {
@@ -134,26 +135,78 @@
           <h1 class="indexHeader">{{ .Site.Params.author.name }}</h1>
         </div>
 
-        {{ if isset .Site.Params "social" }}
-          <div class="social-wrapper">
-            {{ range .Site.Params.social }}
-              <div class="social-box">
-                <a href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a>
-              </div>
+        {{/* Collect socials once (robust ordering) */}}
+        {{ $sc := newScratch }}
+        {{ $sc.Set "github" nil }}
+        {{ $sc.Set "mastodon" nil }}
+        {{ $sc.Set "linkedin" nil }}
+        {{ $sc.Set "youtube" nil }}
+
+        {{ range .Site.Params.social }}
+          {{ $n := lower .name }}
+          {{ $u := lower .url }}
+          {{ if or (eq $n "github")    (in $u "github.com") }}   {{ $sc.Set "github" . }}   {{ end }}
+          {{ if or (eq $n "mastodon")  (in $u "mastodon") }}     {{ $sc.Set "mastodon" . }} {{ end }}
+          {{ if or (eq $n "linkedin")  (in $u "linkedin.com") }} {{ $sc.Set "linkedin" . }} {{ end }}
+          {{ if or (eq $n "youtube")   (or (in $u "youtube.com") (in $u "youtu.be")) }} {{ $sc.Set "youtube" . }} {{ end }}
+        {{ end }}
+
+        <div class="social-wrapper">
+          <!-- Row 1: GitHub only -->
+          {{ with $sc.Get "github" }}
+          <div class="social-row">
+            <div class="social-box github-box">
+              <a href="{{ .url }}" target="_blank" rel="noopener">
+                <!-- GitHub icon (white) -->
+                <img class="social-icon" alt="GitHub"
+                     src="https://cdn.simpleicons.org/github/FFFFFF" />
+                <span>GitHub</span>
+              </a>
+            </div>
+          </div>
+          {{ end }}
+
+          <!-- Row 2: Mastodon, LinkedIn, YouTube -->
+          <div class="social-row">
+            {{ with $sc.Get "mastodon" }}
+            <div class="social-box">
+              <a href="{{ .url }}" target="_blank" rel="noopener">
+                <img class="social-icon" alt="Mastodon"
+                     src="https://cdn.simpleicons.org/mastodon/FFFFFF" />
+                <span>Mastodon</span>
+              </a>
+            </div>
+            {{ end }}
+
+            {{ with $sc.Get "linkedin" }}
+<div class="social-box">
+  <a href="{{ .url }}" target="_blank" rel="noopener">
+    <!-- LinkedIn inline SVG (inherits white via currentColor) -->
+    <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="currentColor" d="M22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.451C23.2 24 24 23.226 24 22.271V1.729C24 .774 23.2 0 22.225 0zM7.0 20.452H3.721V9H7.0v11.452zM5.337 7.433a1.814 1.814 0 1 1 0-3.628 1.814 1.814 0 0 1 0 3.628zM20.447 20.452H17.21V14.8c0-2.807-.605-4.965-3.883-4.965-1.574 0-2.631.865-3.064 1.685h-.044V9H7.107v11.452H10.34v-5.756c0-1.51.287-2.973 2.165-2.973 1.85 0 1.877 1.732 1.877 3.077v5.652h3.065z"/>
+    </svg>
+    <span>LinkedIn</span>
+  </a>
+</div>
+{{ end }}
+
+            {{ with $sc.Get "youtube" }}
+            <div class="social-box">
+              <a href="{{ .url }}" target="_blank" rel="noopener">
+                <img class="social-icon" alt="YouTube"
+                     src="https://cdn.simpleicons.org/youtube/FFFFFF" />
+                <span>YouTube</span>
+              </a>
+            </div>
             {{ end }}
           </div>
-        {{ end }}
+        </div>
       </div>
 
       <main class="main">
         <div class="indexWrapper">
-          {{ if .Site.Params.author.avatarFirst }}
-            {{ partial "avatar.html" . }}
-          {{ end }}
-
-          {{ if not .Site.Params.author.avatarFirst }}
-            {{ partial "avatar.html" . }}
-          {{ end }}
+          {{ if .Site.Params.author.avatarFirst }}{{ partial "avatar.html" . }}{{ end }}
+          {{ if not .Site.Params.author.avatarFirst }}{{ partial "avatar.html" . }}{{ end }}
         </div>
       </main>
     </div>
