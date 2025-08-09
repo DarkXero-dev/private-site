@@ -9,14 +9,15 @@
   {{ partial "head.html" . }}
 
   <style>
-    /* Keep the menu above all content */
+    /* Header/menu must be on top */
     header,
     nav,
     .site-menu {
-      position: relative;
-      z-index: 1;
+      position: relative;   /* keep your theme behavior (fixed/sticky okay too) */
+      z-index: 5000;        /* higher than any page content */
     }
 
+    /* Avoid unnecessary stacking contexts on content */
     .hero {
       display: flex;
       flex-direction: column;
@@ -24,8 +25,8 @@
       gap: 12px;
       margin-top: 10px;
       text-align: center;
-      position: relative;
-      z-index: 1000;
+      position: relative;   /* needed for local positioning, but no z-index */
+      z-index: auto;
     }
 
     .logo {
@@ -34,13 +35,13 @@
       filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
     }
 
-    /* Title: RGB animation + heavy drop shadow + thin black stroke */
+    /* Title: RGB animation + heavy drop shadow + thin semi-transparent stroke */
     .title-box {
       padding: 0;
       background: transparent;
       box-shadow: none;
       position: relative;
-      z-index: 1000;
+      z-index: auto;        /* don't compete with header */
     }
 
     .title-box .indexHeader {
@@ -65,10 +66,10 @@
       -webkit-text-fill-color: transparent;
       animation: rgbCycle 12s linear infinite;
 
-      /* Thin white stroke */
+      /* Thin semi-transparent black stroke */
       -webkit-text-stroke: 0.75px rgba(0, 0, 0, 0.9);
 
-      /* Heavy outer drop shadow for readability */
+      /* Heavy outer drop shadow (valid blur value) */
       text-shadow: 2px 4px -2px rgba(255, 255, 255, 0.5);
     }
 
@@ -85,7 +86,7 @@
       justify-content: center;
       gap: 8px;
       position: relative;
-      z-index: 1000;
+      z-index: auto;        /* below header */
     }
 
     .social-box {
