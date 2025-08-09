@@ -5,29 +5,23 @@
 {{ define "main" }}
 <style>
 body {
-  background-image: url('https://i.imgur.com/3IJUaMB.png');
+  background-image: url('https://i.imgur.com/EFkkKsF.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   margin: 0;
-  padding: 0;  /* ✅ No extra space at top */
+  padding: 0;
   min-height: 100vh;
 }
 
-/* Make sure menu stays above cards */
+/* Keep menu above cards */
 header,
 nav,
 .site-menu {
-  position: relative;  /* Or 'fixed' if needed */
+  position: relative;
   z-index: 10;
 }
-
-/* Optional: if menu is fixed AND overlaps, uncomment this:
-body {
-  padding-top: 70px;
-}
-*/
 
 .listHeader {
   text-align: center;
@@ -36,10 +30,16 @@ body {
   position: relative;
 }
 
+/* ✅ White title with soft shadow */
 .listHeader h1 {
-  font-size: 2rem;
-  color: #fff;
+  font-size: 2.6rem;
   margin-bottom: 1rem;
+  font-weight: 900;
+  letter-spacing: 0.4px;
+  color: #fff;
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.6),
+    0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .listContent {

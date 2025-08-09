@@ -1,11 +1,5 @@
 +++
 aliases = ["posts", "articles", "blog", "showcase", "docs"]
-title = "Posts"
+title = "Posts-List"
 author = "TechXero"
 +++
-
-<div style="text-align: center;">
-
-### 🛜 [Subscribe To RSS Feed](/posts/index.xml) 🛜
-
-</div>
