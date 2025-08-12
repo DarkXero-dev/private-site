@@ -1,3 +1,0 @@
-baseURL = 'https://techxero.com/'
-languageCode = 'en-us'
-theme = ["hugo-redirect", "dimension"]

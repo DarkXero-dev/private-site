@@ -146,25 +146,6 @@ nav,
     
 
     
-    <section class="postMetadata">
-      <dl>
-        
-        
-        
-
-        
-          <dt>published</dt>
-          
-          <dd><time datetime="2019-02-28">February 28, 2019</time></dd>
-        
-
-        
-          <dt>reading time</dt>
-          <dd>1 minute</dd>
-        
-      </dl>
-    </section>
-    
 
     <div>
       <figure class="center-image"><img src="https://i.imgur.com/9WxOnPh.jpeg"
@@ -200,6 +181,19 @@ nav,
 
     </div>
 
+    
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="http"]');
+            links.forEach(function(link) {
+                if (!link.hostname || link.hostname !== window.location.hostname) {
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                }
+            });
+        });
+    </script>
     
 
 </body>

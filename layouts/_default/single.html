@@ -79,7 +79,7 @@ nav,
       <p>{{ .Description }}</p>
     {{ end }}
 
-    {{ if .Params.showMetadata | default true }}
+    {{ if .Params.showMetadata }}
     <section class="postMetadata">
       <dl>
         {{ with .GetTerms "tags" }}
@@ -92,13 +92,13 @@ nav,
           {{ partial "taxonomy/categories.html" . }}
         {{ end }}
 
-        {{ if .Site.Params.published | default true }}
+        {{ if .Site.Params.published }}
           <dt>{{ i18n "published" }}</dt>
           {{ $formattedDate := .Date.Format "2006-01-02" }}
           <dd><time datetime="{{ $formattedDate }}">{{ .Date | time.Format ":date_long" }}</time></dd>
         {{ end }}
 
-        {{ if .Site.Params.readingTime | default true }}
+        {{ if .Site.Params.readingTime }}
           <dt>{{ i18n "reading_time" }}</dt>
           <dd>{{ i18n "reading_time_desc" .ReadingTime }}</dd>
         {{ end }}

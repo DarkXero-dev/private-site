@@ -146,25 +146,6 @@ nav,
     
 
     
-    <section class="postMetadata">
-      <dl>
-        
-        
-        
-
-        
-          <dt>published</dt>
-          
-          <dd><time datetime="2025-08-08">August 8, 2025</time></dd>
-        
-
-        
-          <dt>reading time</dt>
-          <dd>2 minutes</dd>
-        
-      </dl>
-    </section>
-    
 
     <div>
       <h2 id="information">Information</h2>
@@ -201,6 +182,19 @@ nav,
 
     </div>
 
+    
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="http"]');
+            links.forEach(function(link) {
+                if (!link.hostname || link.hostname !== window.location.hostname) {
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                }
+            });
+        });
+    </script>
     
 
 </body>

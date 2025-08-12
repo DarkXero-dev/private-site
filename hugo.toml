@@ -36,9 +36,8 @@ hostname = "Home"
 
 # Global metadata display settings
 # Each can be overridden in individual post frontmatter
+openLinksInNewTab = true
 showMetadata = false
-showPublishedDate = false
-showReadingTime = false
 
   [params.author]
     name = "~{TechXero}~"  # Website and RSS feed author
