@@ -8,6 +8,9 @@ theme = "nightfall"
     [markup.goldmark.renderer]
       unsafe = true
 
+[pagination]
+pagerSize = 3
+
 [menu]
   [[menu.header]]
     name = "about"
@@ -38,6 +41,7 @@ hostname = "Home"
 # Each can be overridden in individual post frontmatter
 openLinksInNewTab = true
 showMetadata = false
+displayDateFormat = "2006-01-02"
 
   [params.author]
     name = "~{TechXero}~"  # Website and RSS feed author
