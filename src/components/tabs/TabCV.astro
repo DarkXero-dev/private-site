@@ -1,0 +1,176 @@
+---
+// CV — converted from CV_LBN_en.pdf, styled to match the site
+const jobs = [
+  {
+    company: 'Apple EU HQ',
+    location: 'Cork, Ireland',
+    period: '2019 – 2020',
+    role: 'Siri Machine Learning / A.I / Transcription',
+    description: 'Transcriber on the French Siri Team & Machine Learning / A.I Specialist',
+    tasks: [
+      'Fixing Siri responses, making sure they are correct',
+      'Geo Tagging when needed',
+      'Reporting Malicious Requests',
+    ],
+  },
+  {
+    company: 'iStyle Computers L.L.C',
+    location: 'Apple Authorized Official Reseller',
+    period: '2015 – 2019',
+    role: 'Confirmed Seller — Apple Products & Support',
+    description: 'Dubai Mall (UAE) 2015–2018 | City Center Beirut (Lebanon) 2018–2019. Max monthly individual turnover: $150K.',
+    tasks: [
+      'Promote Apple Services, including sale of computer hardware and mobile phones',
+      'Provide personalized advice for customers on different Apple products',
+      'Present new Apple products and commercial operations in-store',
+      'Implement actions for specific events (Back to School, Black Friday, etc.)',
+      'Build customer loyalty and support Apple Care setup',
+      'IT support management and software diagnostics',
+      'Stock management, customer receipts, and store accounts',
+    ],
+  },
+  {
+    company: 'Unilog Lebanon',
+    location: 'Beirut, Lebanon',
+    period: '2010 – 2015',
+    role: 'Junior IT Support Technician',
+    description: 'Support and technical assistance of the customer Régie Lebanon.',
+    tasks: [
+      'Ensure proper functioning of hardware and software during Unilog\'s mission with Régie Lebanon',
+      'Perform on-site troubleshooting',
+    ],
+  },
+  {
+    company: 'Independent IT Freelancer',
+    location: 'Beirut, Lebanon',
+    period: '2003 – 2009',
+    role: 'IT Support Technician',
+    description: 'IT Freelancer for individuals and professionals.',
+    tasks: [
+      'Set up computer software and repair computer hardware',
+      'Implement domestic computer networks in homes',
+      'Create websites and forums for individuals',
+      'Computer maintenance in PC / Mac environments, backup and restore data',
+    ],
+  },
+];
+
+const languages = [
+  { name: 'English', level: 'Bilingual' },
+  { name: 'French', level: 'Bilingual' },
+  { name: 'Classical Arabic', level: 'Read, Write, Speak fluently' },
+  { name: 'Lebanese', level: 'Mother tongue' },
+];
+
+const skills = [
+  'Windows, macOS, Linux, iOS and Android',
+  'Repair / Diagnostics PC & Mac',
+  'Diagnosing all software problems (PC/Mac)',
+  'Diagnosing and repairing most PC hardware problems',
+  'Building any type of PC for all occasions (Gaming / Animation 2D or 3D, etc.)',
+];
+---
+
+<div class="space-y-8">
+  <div class="flex items-center justify-between">
+    <h2 class="font-[family-name:var(--font-heading)] text-lg text-[var(--color-accent)]">Curriculum Vitae</h2>
+    <a href="/CV_LBN_en.pdf" download
+       class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[var(--color-accent)] border border-[var(--color-border-accent)] rounded-lg hover:bg-[var(--color-accent-dim)] transition-colors">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      PDF
+    </a>
+  </div>
+
+  <!-- Header -->
+  <div class="info-card p-5">
+    <h3 class="font-[family-name:var(--font-heading)] text-base font-bold text-[var(--color-text-primary)]">
+      Stéphane CHAANINE
+    </h3>
+    <p class="text-sm text-[var(--color-text-secondary)] mt-1">Nationality: Greek &mdash; Beit-Meri, Mont-Liban, Le Nord Metn</p>
+    <p class="text-sm text-[var(--color-text-muted)] mt-0.5">steve.chaanine@gmail.com &middot; +961-3-741446</p>
+  </div>
+
+  <!-- Experience -->
+  <div class="space-y-4">
+    <h3 class="font-[family-name:var(--font-heading)] text-sm text-[var(--color-accent)] uppercase tracking-widest">
+      Professional Experience
+    </h3>
+
+    {jobs.map((job) => (
+      <div class="info-card p-5 space-y-3">
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
+          <div>
+            <h4 class="font-[family-name:var(--font-heading)] text-sm font-bold text-[var(--color-text-primary)]">
+              {job.company}
+            </h4>
+            <p class="text-xs text-[var(--color-text-muted)]">{job.location}</p>
+          </div>
+          <span class="font-[family-name:var(--font-mono)] text-xs text-[var(--color-accent)] whitespace-nowrap">
+            {job.period}
+          </span>
+        </div>
+        <p class="text-sm font-medium text-[var(--color-text-primary)]">{job.role}</p>
+        <p class="text-xs text-[var(--color-text-secondary)]">{job.description}</p>
+        <ul class="space-y-1.5">
+          {job.tasks.map((task) => (
+            <li class="flex items-start gap-2 text-xs text-[var(--color-text-secondary)]">
+              <span class="dot mt-1"></span>
+              {task}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+
+  <!-- Education -->
+  <div class="space-y-3">
+    <h3 class="font-[family-name:var(--font-heading)] text-sm text-[var(--color-accent)] uppercase tracking-widest">
+      Education
+    </h3>
+    <div class="info-card p-5">
+      <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
+        <div>
+          <h4 class="font-[family-name:var(--font-heading)] text-sm font-bold text-[var(--color-text-primary)]">
+            Louis Massignon French High School
+          </h4>
+          <p class="text-xs text-[var(--color-text-muted)]">Abu Dhabi, United Arab Emirates</p>
+        </div>
+        <span class="font-[family-name:var(--font-mono)] text-xs text-[var(--color-accent)]">1998</span>
+      </div>
+      <p class="text-xs text-[var(--color-text-secondary)] mt-2">Baccalaureate level</p>
+    </div>
+  </div>
+
+  <!-- Languages -->
+  <div class="space-y-3">
+    <h3 class="font-[family-name:var(--font-heading)] text-sm text-[var(--color-accent)] uppercase tracking-widest">
+      Languages
+    </h3>
+    <div class="grid grid-cols-2 gap-3">
+      {languages.map((lang) => (
+        <div class="info-card p-4">
+          <span class="text-sm font-medium text-[var(--color-text-primary)]">{lang.name}</span>
+          <p class="text-xs text-[var(--color-text-muted)] mt-0.5">{lang.level}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Technical Skills -->
+  <div class="space-y-3">
+    <h3 class="font-[family-name:var(--font-heading)] text-sm text-[var(--color-accent)] uppercase tracking-widest">
+      Technical Skills
+    </h3>
+    <div class="info-card p-5">
+      <ul class="space-y-2">
+        {skills.map((skill) => (
+          <li class="flex items-start gap-2 text-sm text-[var(--color-text-secondary)]">
+            <span class="dot mt-1.5"></span>
+            {skill}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</div>

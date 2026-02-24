@@ -1,0 +1,102 @@
+---
+import Layout from '../components/layout/Layout.astro';
+import Footer from '../components/layout/Footer.astro';
+import Sidebar from '../components/Sidebar.astro';
+import TabAbout from '../components/tabs/TabAbout.astro';
+import TabInterests from '../components/tabs/TabInterests.astro';
+import TabSpecs from '../components/tabs/TabSpecs.astro';
+import TabMyStory from '../components/tabs/TabMyStory.astro';
+import TabVault from '../components/tabs/TabVault.astro';
+import TabCV from '../components/tabs/TabCV.astro';
+import TabContact from '../components/tabs/TabContact.astro';
+
+const tabs = [
+  { id: 'about', label: 'About' },
+  { id: 'interests', label: 'Interests' },
+  { id: 'specs', label: 'Specs' },
+  { id: 'cv', label: 'Résumé' },
+  { id: 'mystory', label: 'My Story' },
+  { id: 'vault', label: 'The Vault' },
+  { id: 'contact', label: 'Contact' },
+];
+---
+
+<Layout title="TechXero — Private vCard">
+  <div class="relative z-10 h-screen flex flex-col md:flex-row">
+
+    <!-- ─── Sidebar (left) ─── -->
+    <div class="md:w-64 lg:w-72 shrink-0 md:h-screen md:overflow-y-auto">
+      <Sidebar />
+    </div>
+
+    <!-- ─── Main content (right) ─── -->
+    <div class="flex-1 flex flex-col min-h-0 border-l border-[var(--color-border)]">
+
+      <!-- Tab bar -->
+      <nav class="flex items-center border-b border-[var(--color-border)] px-4 overflow-x-auto shrink-0" style="background:rgba(26,29,46,0.7);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:0 2px 16px rgba(0,0,0,0.3)">
+        {tabs.map((tab, i) => (
+          <button
+            class={`tab-btn ${i === 0 ? 'active' : ''}`}
+            data-tab={tab.id}
+            type="button"
+          >
+            {tab.label}
+          </button>
+        ))}
+      </nav>
+
+      <!-- Tab panels -->
+      <div class="tab-content-area flex-1 min-h-0 p-6 md:p-8 lg:p-10">
+        <div id="panel-about" class="tab-panel active">
+          <TabAbout />
+        </div>
+        <div id="panel-interests" class="tab-panel h-full">
+          <TabInterests />
+        </div>
+        <div id="panel-specs" class="tab-panel">
+          <TabSpecs />
+        </div>
+        <div id="panel-cv" class="tab-panel">
+          <TabCV />
+        </div>
+        <div id="panel-mystory" class="tab-panel">
+          <TabMyStory />
+        </div>
+        <div id="panel-vault" class="tab-panel">
+          <TabVault />
+        </div>
+        <div id="panel-contact" class="tab-panel h-full">
+          <TabContact />
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <Footer />
+    </div>
+  </div>
+
+  <!-- Tab switching script -->
+  <script>
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.tab-btn');
+    const panels = document.querySelectorAll<HTMLDivElement>('.tab-panel');
+    const contentArea = document.querySelector('.tab-content-area');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.tab;
+
+        buttons.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        panels.forEach((p) => {
+          p.classList.remove('active');
+          if (p.id === `panel-${target}`) {
+            p.classList.add('active');
+          }
+        });
+
+        if (contentArea) contentArea.scrollTop = 0;
+      });
+    });
+  </script>
+</Layout>

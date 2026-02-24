@@ -1,0 +1,275 @@
+@import "tailwindcss";
+
+/* ─── Theme Tokens ─── */
+@theme {
+  /* Backgrounds — warmer dark with depth */
+  --color-bg-body: #12141f;
+  --color-bg-sidebar: #151828;
+  --color-bg-card: #1a1d2e;
+  --color-bg-card-hover: #20243a;
+  --color-bg-tab: #1a1d2e;
+  --color-bg-tab-active: #12141f;
+  --color-bg-input: #12141f;
+
+  /* Accent — blue / purple */
+  --color-accent: #7c6aef;
+  --color-accent-light: #a594ff;
+  --color-accent-dark: #6050d0;
+  --color-accent-dim: rgba(124, 106, 239, 0.15);
+
+  /* Text */
+  --color-text-primary: #e6edf3;
+  --color-text-secondary: #a8b2c0;
+  --color-text-muted: #6e7a8a;
+
+  /* Borders */
+  --color-border: #21262d;
+  --color-border-accent: rgba(124, 106, 239, 0.35);
+
+  /* Fonts */
+  --font-heading: 'Space Mono', ui-monospace, monospace;
+  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, monospace;
+}
+
+/* ─── Base ─── */
+html {
+  font-size: 1.1rem;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg-body);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-bg-body);
+}
+
+/* ─── Background: gradient.jpg with subtle animation ─── */
+.bg-gradient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: url('/gradient.jpg') center/cover no-repeat;
+  animation: bg-drift 30s ease-in-out infinite alternate;
+}
+
+@keyframes bg-drift {
+  0%   { transform: scale(1) translate(0, 0); }
+  50%  { transform: scale(1.08) translate(-2%, 1%); }
+  100% { transform: scale(1.04) translate(1%, -1%); }
+}
+
+/* Dark overlay so text stays readable */
+.bg-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: rgba(12, 12, 20, 0.55);
+}
+
+/* ─── Sidebar ─── */
+.sidebar {
+  background: rgba(21, 24, 40, 0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-right: 1px solid rgba(33, 38, 45, 0.6);
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.4);
+}
+
+/* ─── Tabs ─── */
+.tab-btn {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  padding: 0.6rem 1.2rem;
+  color: var(--color-text-muted);
+  border-bottom: 2px solid transparent;
+  background: none;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  color: var(--color-text-secondary);
+}
+
+.tab-btn.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+/* ─── Tab Content ─── */
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.tab-content-area {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+
+.tab-content-area::-webkit-scrollbar {
+  width: 6px;
+}
+
+.tab-content-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tab-content-area::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+.tab-content-area::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-dark);
+}
+
+/* ─── Info Cards ─── */
+.info-card {
+  background: rgba(26, 29, 46, 0.7);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba(33, 38, 45, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35), 0 1px 4px rgba(0, 0, 0, 0.2);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.info-card:hover {
+  border-color: var(--color-border-accent);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4), 0 1px 6px rgba(124, 106, 239, 0.08);
+}
+
+/* ─── Social Link ─── */
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.2s;
+}
+
+.social-link:hover {
+  color: var(--color-accent);
+}
+
+.social-link:hover .social-icon {
+  stroke: var(--color-accent);
+}
+
+/* ─── Video Embed ─── */
+.video-wrap {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.video-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ─── Spec Row ─── */
+.spec-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: rgba(26, 29, 46, 0.65);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(33, 38, 45, 0.5);
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+
+.spec-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  min-width: 56px;
+}
+
+/* ─── RGB Title ─── */
+@keyframes rgb-shift {
+  0%   { color: #ff3355; }
+  16%  { color: #ff8800; }
+  33%  { color: #ffdd00; }
+  50%  { color: #33ff88; }
+  66%  { color: #3388ff; }
+  83%  { color: #aa44ff; }
+  100% { color: #ff3355; }
+}
+
+.rgb-title {
+  animation: rgb-shift 8s linear infinite;
+}
+
+/* ─── Bullet Dot ─── */
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  flex-shrink: 0;
+}
+
+/* ─── Vault Iframe ─── */
+.vault-frame {
+  width: 100%;
+  height: calc(100vh - 180px);
+  border: 1px solid rgba(33, 38, 45, 0.5);
+  border-radius: 8px;
+  background: rgba(26, 29, 46, 0.65);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .rgb-title {
+    animation: none;
+    color: var(--color-accent);
+  }
+  .bg-gradient {
+    animation: none;
+  }
+}
+
+/* ─── Mobile Overrides ─── */
+@media (max-width: 768px) {
+  html, body {
+    overflow: auto;
+  }
+}

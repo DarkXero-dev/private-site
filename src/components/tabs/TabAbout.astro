@@ -1,0 +1,88 @@
+---
+// About tab — bio with YouTube embeds and images from the original site
+// Dynamic age calculation — born August 1980
+const birthYear = 1980;
+const birthMonth = 7; // August (0-indexed)
+const now = new Date();
+let age = now.getFullYear() - birthYear;
+if (now.getMonth() < birthMonth) {
+  age--;
+}
+---
+
+<div class="space-y-6">
+  <h2 class="font-[family-name:var(--font-heading)] text-lg text-[var(--color-accent)]">About Me</h2>
+
+  <div class="space-y-4 text-[var(--color-text-secondary)] text-sm leading-relaxed">
+    <p>
+      My name's <strong class="text-[var(--color-text-primary)]">Steve</strong>, A.K.A
+      <strong class="text-[var(--color-accent)]">TechXero/DarkXero</strong>, and I am a {age} year old
+      Tech fanatic from <strong class="text-[var(--color-text-primary)]">Lebanon</strong>. I love technology,
+      mainly Computer Hardware/Software, smartphones, and some web-design. I also love many music genres,
+      like all types of Electronic mostly anything with hard bass, classic 80's, Heavy Metal, Country, among others.
+    </p>
+
+    <div class="video-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/NsBiI-LyVm4"
+        title="About Me — Music"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <p>
+      Films too, especially Art Films by famous Directors like <strong class="text-[var(--color-text-primary)]">Lars Von Trier</strong>,
+      <strong class="text-[var(--color-text-primary)]">Tarkovsky</strong>,
+      <strong class="text-[var(--color-text-primary)]">Kubrick</strong>,
+      <strong class="text-[var(--color-text-primary)]">Francis Ford Coppola</strong>,
+      <strong class="text-[var(--color-text-primary)]">George Lucas</strong> and others.
+      Don't get me wrong, I do like some of the commercial movies coming out today, but not all.
+      These days they tend to do remakes rather than come up with new stuff...
+    </p>
+
+    <div class="video-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/6IZGwvxhXvw"
+        title="About Me — Films"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <!-- Support Image -->
+    <div class="rounded-lg overflow-hidden border border-[var(--color-border)]">
+      <img src="https://i.imgur.com/gu80XY3.png" alt="Support" class="w-full h-auto" loading="lazy" />
+    </div>
+
+    <p>
+      I am an avid <strong class="text-[var(--color-text-primary)]">iOS</strong> user when it comes to smartphones.
+      I did use <strong class="text-[var(--color-text-primary)]">Android</strong> for 5 years, was happy on it for a while,
+      I moved to iOS and have been a happy man ever since. However, it's not to say that I will stick with it for good,
+      who knows what the future holds? I might go back to Android... I use both in parallel now to see where I will land...
+    </p>
+
+    <!-- Android/iOS Image -->
+    <div class="rounded-lg overflow-hidden border border-[var(--color-border)]">
+      <img src="https://i.imgur.com/V8UErup.png" alt="iOS and Android" class="w-full h-auto" loading="lazy" />
+    </div>
+
+    <p>
+      In essence, I am a <em>Multi-User</em> — I don't stick to one platform, I like to dabble in all of them.
+      I currently use <strong class="text-[var(--color-text-primary)]">iOS</strong> and
+      <strong class="text-[var(--color-text-primary)]">Android</strong> for smartphones,
+      <strong class="text-[var(--color-text-primary)]">macOS</strong>,
+      <strong class="text-[var(--color-text-primary)]">Windows</strong> and
+      <strong class="text-[var(--color-text-primary)]">Linux</strong> for desktop.
+      I currently maintain my very own ArchLinux Distro
+      <a href="https://xerolinux.xyz" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent)] hover:underline">XeroLinux</a>.
+    </p>
+
+    <p>
+      Other than that, I do freelance as a <strong class="text-[var(--color-text-primary)]">Technical Support specialist</strong>
+      from time to time. I have landed a Job at <strong class="text-[var(--color-text-primary)]">Apple</strong> in 2019,
+      in <strong class="text-[var(--color-text-primary)]">Ireland</strong>. But it didn't last long unfortunately.
+      At least I can say that I have worked for that company LoL...
+    </p>
+  </div>
+</div>

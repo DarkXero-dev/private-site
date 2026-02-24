@@ -1,0 +1,25 @@
+# build output
+dist/
+
+# dependencies
+node_modules/
+
+# environment variables
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+push.sh
+.DS_Store
+Thumbs.db
+
+# Astro
+.astro/
+
+# Test artifacts
+test-results/
+playwright-report/

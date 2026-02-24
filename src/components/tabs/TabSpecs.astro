@@ -1,0 +1,50 @@
+---
+// Tech specs — StationXero rig
+const mainSpecs = [
+  { label: 'GPU', value: 'AMD RX 7800XT' },
+  { label: 'CPU', value: 'AMD Ryzen 9 5950X' },
+  { label: 'OS', value: 'XeroLinux + Windows 11' },
+  { label: 'DE/Session', value: 'KDE Plasma Wayland' },
+  { label: 'Phone', value: 'iPhone (iOS) + Android' },
+];
+---
+
+<div class="space-y-6">
+  <h2 class="font-[family-name:var(--font-heading)] text-lg text-[var(--color-accent)]">Tech Specs</h2>
+
+  <p class="text-[var(--color-text-secondary)]">
+    For the full specs of all machines, head over to
+    <a href="https://xerolinux.xyz/gear/" target="_blank" rel="noopener noreferrer"
+       class="text-[var(--color-accent)] hover:underline">xerolinux.xyz/gear</a>.
+  </p>
+
+  <div class="info-card p-5 space-y-4">
+    <div class="flex items-center gap-3 mb-2">
+      <span class="font-[family-name:var(--font-mono)] text-xs text-[var(--color-accent)] tracking-widest uppercase">StationXero</span>
+      <span class="text-[var(--color-text-muted)] text-xs">// Daily Driver</span>
+    </div>
+
+    <!-- Rig Image with hover shine effect -->
+    <div class="group relative rounded-lg overflow-hidden border border-[var(--color-border)]">
+      <img
+        src="/desktop.webp"
+        alt="StationXero Setup"
+        class="w-full h-auto transition-transform duration-700 group-hover:scale-[1.02]"
+        loading="lazy"
+      />
+      <!-- Shine sweep on hover -->
+      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/8 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+      <!-- Subtle permanent vignette -->
+      <div class="absolute inset-0 pointer-events-none" style="box-shadow: inset 0 0 60px rgba(0,0,0,0.4);"></div>
+    </div>
+
+    <div class="space-y-2">
+      {mainSpecs.map((spec) => (
+        <div class="spec-row">
+          <span class="spec-label">{spec.label}</span>
+          <span class="text-sm text-[var(--color-text-primary)]">{spec.value}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>

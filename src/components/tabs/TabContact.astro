@@ -1,0 +1,210 @@
+---
+// Contact tab — info card + status/weather terminal
+---
+
+<div class="flex flex-col gap-6 h-full">
+  <h2 class="font-[family-name:var(--font-heading)] text-lg text-[var(--color-accent)] shrink-0">Contact</h2>
+
+  <div class="info-card p-5 space-y-5 shrink-0">
+    <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+      Want to get in touch? Whether it's about tech, a collaboration, or just to say hello &mdash;
+      feel free to reach out.
+    </p>
+
+    <a href="mailto:info@techxero.com"
+       class="inline-flex items-center gap-2.5 px-5 py-2.5 text-sm font-medium text-white bg-[var(--color-accent)] rounded-lg hover:bg-[var(--color-accent-light)] transition-colors">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+      </svg>
+      info@techxero.com
+    </a>
+
+    <div class="h-px bg-[var(--color-border)]"></div>
+
+    <div class="space-y-3">
+      <h3 class="font-[family-name:var(--font-heading)] text-xs text-[var(--color-text-muted)] uppercase tracking-widest">Find me elsewhere</h3>
+      <div class="grid grid-cols-2 gap-3">
+        <a href="https://github.com/DarkXero-dev" target="_blank" rel="noopener noreferrer" class="info-card p-3 flex items-center gap-2 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)]">
+          <svg class="w-4 h-4" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
+        <a href="https://mastodon.social/@TechXero" target="_blank" rel="noopener noreferrer" class="info-card p-3 flex items-center gap-2 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)]">
+          <svg class="w-4 h-4" stroke="currentColor" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21.327 8.566c0-4.339-2.843-5.61-2.843-5.61-1.433-.658-3.894-.935-6.451-.956h-.063c-2.557.021-5.016.298-6.45.956 0 0-2.843 1.272-2.843 5.61 0 .993-.019 2.181.012 3.441.103 4.243.778 8.425 4.701 9.463 1.809.479 3.362.579 4.612.51 2.268-.126 3.541-.809 3.541-.809l-.075-1.646s-1.621.511-3.441.449c-1.804-.062-3.707-.194-3.999-2.409a4.523 4.523 0 0 1-.04-.621s1.77.432 4.014.535c1.372.063 2.658-.08 3.965-.236 2.506-.299 4.688-1.843 4.962-3.254.434-2.223.398-5.424.398-5.424zm-3.353 5.59h-2.081V9.057c0-1.075-.452-1.62-1.357-1.62-1 0-1.501.647-1.501 1.927v2.791h-2.069V9.364c0-1.28-.501-1.927-1.502-1.927-.904 0-1.357.546-1.357 1.62v5.099H6.026V8.903c0-1.074.273-1.927.823-2.558.566-.631 1.307-.955 2.228-.955 1.065 0 1.872.41 2.405 1.228l.518.869.519-.869c.533-.818 1.34-1.228 2.405-1.228.92 0 1.662.324 2.228.955.549.631.822 1.484.822 2.558v5.253z"/></svg>
+          Mastodon
+        </a>
+        <a href="https://linkedin.com/in/schaanine" target="_blank" rel="noopener noreferrer" class="info-card p-3 flex items-center gap-2 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)]">
+          <svg class="w-4 h-4" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://www.youtube.com/@TechXeroLB" target="_blank" rel="noopener noreferrer" class="info-card p-3 flex items-center gap-2 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)]">
+          <svg class="w-4 h-4" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" stroke="none" fill="currentColor"/></svg>
+          YouTube
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section separator -->
+  <div class="font-[family-name:var(--font-heading)] text-base font-bold text-[var(--color-text-muted)] text-center tracking-widest shrink-0">~~~~~~~~~~ Grid Information ~~~~~~~~~~</div>
+
+  <!-- Status + Weather Terminal — sized to content -->
+  <div class="hidden lg:flex lg:flex-col info-card p-0 overflow-hidden shrink-0">
+    <!-- Title bar -->
+    <div class="flex items-center gap-2 px-4 py-2.5 shrink-0 border-b border-[var(--color-border)]">
+      <span class="w-3 h-3 rounded-full bg-red-500/70"></span>
+      <span class="w-3 h-3 rounded-full bg-yellow-500/70"></span>
+      <span class="w-3 h-3 rounded-full bg-green-500/70"></span>
+      <span class="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)] ml-2">techxero@stationxero — status</span>
+    </div>
+
+    <!-- Terminal body — full width, full height -->
+    <div id="contact-terminal" class="flex-1 flex flex-col font-[family-name:var(--font-mono)] text-[11px] leading-[1.6] overflow-hidden">
+
+      <!-- Status bar -->
+      <div class="flex flex-wrap gap-x-6 gap-y-1 px-4 py-2.5 shrink-0 border-b border-[var(--color-border)] text-[var(--color-text-muted)]">
+        <span><span class="text-[var(--color-accent)]">TZ</span> Asia/Beirut (GMT+2)</span>
+        <span><span class="text-[var(--color-accent)]">LOCAL</span> <span id="live-clock">--:--:--</span></span>
+        <span><span class="text-[var(--color-accent)]">STATUS</span> <span class="text-[#4ade80]">● online</span></span>
+        <span><span class="text-[var(--color-accent)]">LOC</span> Beit-Meri, Lebanon</span>
+      </div>
+
+      <!-- Weather fills rest -->
+      <div id="weather-box" class="flex-1 flex flex-col px-4 py-3 text-[var(--color-text-muted)]">
+        <div class="text-[#4ade80] mb-2 shrink-0">$ curl wttr.in/Beit-Meri</div>
+        <div id="weather-content" class="flex-1 flex flex-col">
+          <span class="text-[var(--color-text-muted)]">Fetching weather data...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- End separator -->
+  <div class="font-[family-name:var(--font-heading)] text-base font-bold text-[var(--color-text-muted)] text-center tracking-widest shrink-0">~~~~~~~~~~~ End - Of - Line ~~~~~~~~~~~</div>
+</div>
+
+<script>
+  // Live clock
+  const clockEl = document.getElementById('live-clock');
+  if (clockEl) {
+    function updateClock() {
+      clockEl.textContent = new Date().toLocaleTimeString('en-GB', { timeZone: 'Asia/Beirut', hour12: false });
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+  }
+
+  // Weather — rendered as full-width HTML
+  const wBox = document.getElementById('weather-content');
+  if (wBox && window.innerWidth >= 1024) {
+    fetch('https://wttr.in/Beit-Meri+Lebanon?format=j1')
+      .then(r => { if (!r.ok) throw new Error('fail'); return r.json(); })
+      .then(data => {
+        const c = data.current_condition[0];
+        const a = data.nearest_area[0];
+        const t = data.weather[0];
+        const t2 = data.weather[1];
+        const t3 = data.weather[2];
+
+        const city = a.areaName[0].value;
+        const region = a.region[0].value;
+        const country = a.country[0].value;
+        const desc = c.weatherDesc[0].value;
+        const code = parseInt(c.weatherCode);
+        const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+        const now = new Date();
+
+        // ASCII art
+        let art;
+        if (code === 113) art = ['    \\   /    ','     .-.     ','  ― (   ) ―  ','     `-\'     ','    /   \\    '];
+        else if (code === 116 || code === 119) art = ['   \\  /      ',' _ /"".--.   ','   \\_(   ).  ','   /(___(__) ','             '];
+        else if ([176,263,266,293,296,299,302,305,308,311,314,353,356,359].includes(code)) art = ['     .-.     ','    (   ).   ','   (___(__)  ','   ‚ʻ‚ʻ‚ʻ   ','   ‚ʻ‚ʻ‚ʻ   '];
+        else if ([200,386,389,392,395].includes(code)) art = ['     .-.     ','    (   ).   ','   (___(__)  ','  ⚡ʻ‚⚡ʻ‚   ','   ‚ʻ‚ʻ‚ʻ   '];
+        else if ([227,230,323,326,329,332,335,338,368,371].includes(code)) art = ['     .-.     ','    (   ).   ','   (___(__)  ','   * * * *   ','  * * * *    '];
+        else art = ['   \\  /      ',' _ /"".--.   ','   \\_(   ).  ','   /(___(__) ','             '];
+
+        const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html) e.innerHTML = html; return e; };
+
+        wBox.innerHTML = '';
+
+        // Header
+        const hdr = el('div', 'text-[#e6edf3] font-bold mb-2', `Weather report: ${city}, ${region}, ${country}`);
+        wBox.appendChild(hdr);
+
+        // Full-width separator
+        const sep = () => { const s = el('div', 'w-full h-px bg-[var(--color-border)] my-2'); return s; };
+        wBox.appendChild(sep());
+
+        // Current conditions: art left + details right, full width
+        const row = el('div', 'flex gap-4 items-start w-full my-1');
+        const artBox = el('pre', 'text-[#facc15] shrink-0 leading-[1.4]', art.join('\n'));
+        artBox.style.fontSize = '11px';
+        const details = el('div', 'flex-1 grid grid-cols-2 gap-x-4 gap-y-1');
+        details.innerHTML = `
+          <div><span class="text-[var(--color-accent)]">Condition</span> <span class="text-[#e6edf3]">${desc}</span></div>
+          <div><span class="text-[var(--color-accent)]">Temp</span> <span class="text-[#e6edf3]">${c.temp_C}°C</span> <span class="text-[var(--color-text-muted)]">(feels ${c.FeelsLikeC}°C)</span></div>
+          <div><span class="text-[var(--color-accent)]">Wind</span> <span class="text-[#e6edf3]">${c.windspeedKmph} km/h ${c.winddir16Point}</span></div>
+          <div><span class="text-[var(--color-accent)]">Humidity</span> <span class="text-[#e6edf3]">${c.humidity}%</span></div>
+          <div><span class="text-[var(--color-accent)]">Pressure</span> <span class="text-[#e6edf3]">${c.pressure} hPa</span></div>
+          <div><span class="text-[var(--color-accent)]">UV Index</span> <span class="text-[#e6edf3]">${c.uvIndex}</span></div>
+          <div><span class="text-[var(--color-accent)]">Visibility</span> <span class="text-[#e6edf3]">${c.visibility} km</span></div>
+          <div><span class="text-[var(--color-accent)]">Clouds</span> <span class="text-[#e6edf3]">${c.cloudcover}%</span></div>
+        `;
+        row.appendChild(artBox);
+        row.appendChild(details);
+        wBox.appendChild(row);
+
+        wBox.appendChild(sep());
+
+        // Forecast — full width table
+        const fLabel = el('div', 'text-[var(--color-accent)] text-[10px] uppercase tracking-widest mb-1', 'Forecast');
+        wBox.appendChild(fLabel);
+
+        const forecasts = [t, t2, t3].filter(Boolean);
+        const fTable = el('div', 'w-full grid grid-cols-[auto_1fr_1fr_1fr] gap-x-4 gap-y-0.5');
+        forecasts.forEach((f, i) => {
+          const d = i === 0 ? now : new Date(f.date + 'T12:00:00');
+          const dayName = i === 0 ? 'Today' : days[d.getDay()];
+          const fDesc = f.hourly[4].weatherDesc[0].value;
+          fTable.innerHTML += `
+            <span class="text-[#e6edf3]">${dayName}</span>
+            <span><span class="text-[#4ade80]">↑ ${f.maxtempC}°C</span></span>
+            <span><span class="text-[#22d3ee]">↓ ${f.mintempC}°C</span></span>
+            <span class="text-[var(--color-text-muted)]">${fDesc}</span>
+          `;
+        });
+        wBox.appendChild(fTable);
+
+        wBox.appendChild(sep());
+
+        // Astronomy — full width
+        const astro = t.astronomy[0];
+        const aRow = el('div', 'w-full grid grid-cols-2 gap-x-4 gap-y-0.5');
+        aRow.innerHTML = `
+          <div><span class="text-[var(--color-accent)]">Sunrise</span> <span class="text-[#e6edf3]">${astro.sunrise}</span></div>
+          <div><span class="text-[var(--color-accent)]">Sunset</span> <span class="text-[#e6edf3]">${astro.sunset}</span></div>
+          <div><span class="text-[var(--color-accent)]">Moonrise</span> <span class="text-[#e6edf3]">${astro.moonrise}</span></div>
+          <div><span class="text-[var(--color-accent)]">Moon</span> <span class="text-[#e6edf3]">${astro.moon_phase}</span></div>
+        `;
+        wBox.appendChild(aRow);
+
+        // Footer
+        const foot = el('div', 'mt-auto pt-2 text-[10px] text-[var(--color-text-muted)] flex justify-between w-full');
+        foot.innerHTML = `<span>${a.latitude}°N, ${a.longitude}°E</span><span>Updated: ${c.observation_time} UTC</span>`;
+        wBox.appendChild(foot);
+      })
+      .catch(() => {
+        wBox.innerHTML = `
+          <pre class="text-[var(--color-text-muted)] whitespace-pre">
+  Weather report: Beit-Meri, Mont-Liban, Lebanon
+
+       \\   /      Conditions:   --
+        .-.       Temperature:  --°C
+     ― (   ) ―   Wind:         -- km/h
+        \`-'       Humidity:     --%
+       /   \\      Visibility:   -- km
+
+  Weather data temporarily unavailable.
+  Try: curl wttr.in/Beit-Meri</pre>`;
+      });
+  }
+</script>

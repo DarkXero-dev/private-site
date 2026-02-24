@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://techxero.com/sitemap-index.xml
