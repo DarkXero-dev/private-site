@@ -9,14 +9,8 @@ const mainSpecs = [
 ];
 ---
 
-<div class="space-y-6">
-  <h2 class="font-[family-name:var(--font-heading)] text-lg text-[var(--color-accent)]">Tech Specs</h2>
-
-  <p class="text-[var(--color-text-secondary)]">
-    For the full specs of all machines, head over to
-    <a href="https://xerolinux.xyz/gear/" target="_blank" rel="noopener noreferrer"
-       class="text-[var(--color-accent)] hover:underline">xerolinux.xyz/gear</a>.
-  </p>
+<div class="max-w-4xl mx-auto flex flex-col gap-6 h-full justify-center">
+  <h2 class="font-[family-name:var(--font-heading)] text-lg text-[var(--color-accent)]">Rig</h2>
 
   <div class="info-card p-5 space-y-4">
     <div class="flex items-center gap-3 mb-2">
@@ -38,9 +32,9 @@ const mainSpecs = [
       <div class="absolute inset-0 pointer-events-none" style="box-shadow: inset 0 0 60px rgba(0,0,0,0.4);"></div>
     </div>
 
-    <div class="space-y-2">
+    <div class="flex flex-wrap gap-3">
       {mainSpecs.map((spec) => (
-        <div class="spec-row">
+        <div class="spec-row flex-col items-start gap-1">
           <span class="spec-label">{spec.label}</span>
           <span class="text-sm text-[var(--color-text-primary)]">{spec.value}</span>
         </div>
