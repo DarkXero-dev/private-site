@@ -1,6 +1,5 @@
 ---
-// About tab — bio with YouTube embeds and images from the original site
-// Dynamic age calculation — born August 1980
+// About tab — bio with structured sections matching site design
 const birthYear = 1980;
 const birthMonth = 7; // August (0-indexed)
 const now = new Date();
@@ -10,79 +9,129 @@ if (now.getMonth() < birthMonth) {
 }
 ---
 
-<div class="space-y-6">
+<div class="max-w-4xl mx-auto space-y-8">
   <h2 class="font-[family-name:var(--font-heading)] text-lg text-[var(--color-accent)]">About Me</h2>
 
-  <div class="space-y-4 text-[var(--color-text-secondary)] text-sm leading-relaxed">
-    <p>
+  <!-- Bio Card -->
+  <div class="info-card p-5">
+    <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
       My name's <strong class="text-[var(--color-text-primary)]">Steve</strong>, A.K.A
       <strong class="text-[var(--color-accent)]">TechXero/DarkXero</strong>, and I am a {age} year old
       Tech fanatic from <strong class="text-[var(--color-text-primary)]">Lebanon</strong>. I love technology,
       mainly Computer Hardware/Software, smartphones, and some web-design. I also love many music genres,
       like all types of Electronic mostly anything with hard bass, classic 80's, Heavy Metal, Country, among others.
     </p>
+  </div>
 
-    <div class="video-wrap">
-      <iframe
-        src="https://www.youtube.com/embed/NsBiI-LyVm4"
-        title="About Me — Music"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
+  <!-- Music Section -->
+  <div class="space-y-3">
+    <h3 class="font-[family-name:var(--font-heading)] text-sm text-[var(--color-accent)] uppercase tracking-widest">
+      Music
+    </h3>
+    <div class="info-card p-5">
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/NsBiI-LyVm4"
+          title="About Me — Music"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
     </div>
+  </div>
 
-    <p>
-      Films too, especially Art Films by famous Directors like <strong class="text-[var(--color-text-primary)]">Lars Von Trier</strong>,
-      <strong class="text-[var(--color-text-primary)]">Tarkovsky</strong>,
-      <strong class="text-[var(--color-text-primary)]">Kubrick</strong>,
-      <strong class="text-[var(--color-text-primary)]">Francis Ford Coppola</strong>,
-      <strong class="text-[var(--color-text-primary)]">George Lucas</strong> and others.
-      Don't get me wrong, I do like some of the commercial movies coming out today, but not all.
-      These days they tend to do remakes rather than come up with new stuff...
-    </p>
-
-    <div class="video-wrap">
-      <iframe
-        src="https://www.youtube.com/embed/6IZGwvxhXvw"
-        title="About Me — Films"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
+  <!-- Films Section -->
+  <div class="space-y-3">
+    <h3 class="font-[family-name:var(--font-heading)] text-sm text-[var(--color-accent)] uppercase tracking-widest">
+      Films
+    </h3>
+    <div class="info-card p-5 space-y-4">
+      <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+        Films too, especially Art Films by famous Directors like
+        <strong class="text-[var(--color-text-primary)]">Lars Von Trier</strong>,
+        <strong class="text-[var(--color-text-primary)]">Tarkovsky</strong>,
+        <strong class="text-[var(--color-text-primary)]">Kubrick</strong>,
+        <strong class="text-[var(--color-text-primary)]">Francis Ford Coppola</strong>,
+        <strong class="text-[var(--color-text-primary)]">George Lucas</strong> and others.
+        Don't get me wrong, I do like some of the commercial movies coming out today, but not all.
+        These days they tend to do remakes rather than come up with new stuff...
+      </p>
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/6IZGwvxhXvw"
+          title="About Me — Films"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
     </div>
+  </div>
 
-    <!-- Support Image -->
-    <div class="rounded-lg overflow-hidden border border-[var(--color-border)]">
-      <img src="https://i.imgur.com/gu80XY3.png" alt="Support" class="w-full h-auto" loading="lazy" />
+  <!-- Platforms Section -->
+  <div class="space-y-3">
+    <h3 class="font-[family-name:var(--font-heading)] text-sm text-[var(--color-accent)] uppercase tracking-widest">
+      Platforms
+    </h3>
+    <div class="info-card p-5">
+      <div class="rounded-lg overflow-hidden">
+        <img src="/ios-android.png" alt="iOS and Android" class="w-full h-auto" loading="lazy" />
+      </div>
     </div>
-
-    <p>
-      I am an avid <strong class="text-[var(--color-text-primary)]">iOS</strong> user when it comes to smartphones.
-      I did use <strong class="text-[var(--color-text-primary)]">Android</strong> for 5 years, was happy on it for a while,
-      I moved to iOS and have been a happy man ever since. However, it's not to say that I will stick with it for good,
-      who knows what the future holds? I might go back to Android... I use both in parallel now to see where I will land...
-    </p>
-
-    <!-- Android/iOS Image -->
-    <div class="rounded-lg overflow-hidden border border-[var(--color-border)]">
-      <img src="https://i.imgur.com/V8UErup.png" alt="iOS and Android" class="w-full h-auto" loading="lazy" />
+    <div class="info-card p-5 space-y-4">
+      <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+        I am an avid <strong class="text-[var(--color-text-primary)]">iOS</strong> user when it comes to smartphones.
+        I did use <strong class="text-[var(--color-text-primary)]">Android</strong> for 5 years, was happy on it for a while,
+        I moved to iOS and have been a happy man ever since. However, it's not to say that I will stick with it for good,
+        who knows what the future holds? I might go back to Android... I use both in parallel now to see where I will land...
+      </p>
+      <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+        In essence, I am a <em class="text-[var(--color-text-primary)] not-italic font-medium">Multi-User</em> — I don't stick to one platform, I like to dabble in all of them.
+        I currently use <strong class="text-[var(--color-text-primary)]">iOS</strong> and
+        <strong class="text-[var(--color-text-primary)]">Android</strong> for smartphones,
+        <strong class="text-[var(--color-text-primary)]">macOS</strong>,
+        <strong class="text-[var(--color-text-primary)]">Windows</strong> and
+        <strong class="text-[var(--color-text-primary)]">Linux</strong> for desktop.
+      </p>
     </div>
+  </div>
 
-    <p>
-      In essence, I am a <em>Multi-User</em> — I don't stick to one platform, I like to dabble in all of them.
-      I currently use <strong class="text-[var(--color-text-primary)]">iOS</strong> and
-      <strong class="text-[var(--color-text-primary)]">Android</strong> for smartphones,
-      <strong class="text-[var(--color-text-primary)]">macOS</strong>,
-      <strong class="text-[var(--color-text-primary)]">Windows</strong> and
-      <strong class="text-[var(--color-text-primary)]">Linux</strong> for desktop.
+  <!-- Background -->
+  <div class="space-y-3">
+    <h3 class="font-[family-name:var(--font-heading)] text-sm text-[var(--color-accent)] uppercase tracking-widest">
+      Background
+    </h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div class="info-card p-4 space-y-2">
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-[var(--color-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <h4 class="font-[family-name:var(--font-heading)] text-sm font-bold text-[var(--color-text-primary)]">Apple</h4>
+        </div>
+        <p class="text-xs text-[var(--color-text-secondary)]">Landed a job at Apple in 2019 in Ireland. But it didn't last long unfortunately. At least I can say that I have worked for that company LoL...</p>
+        <span class="font-[family-name:var(--font-mono)] text-xs text-[var(--color-accent)]">Cork, Ireland &middot; 2019</span>
+      </div>
+      <div class="info-card p-4 space-y-2">
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-[var(--color-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <h4 class="font-[family-name:var(--font-heading)] text-sm font-bold text-[var(--color-text-primary)]">Freelance</h4>
+        </div>
+        <p class="text-xs text-[var(--color-text-secondary)]">Freelance Technical Support specialist — I help people with their tech problems from time to time.</p>
+        <span class="font-[family-name:var(--font-mono)] text-xs text-[var(--color-accent)]">Lebanon &middot; Ongoing</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- XeroLinux -->
+  <div class="info-card p-5">
+    <div class="rounded-lg overflow-hidden">
+      <img src="/xerolinux.png" alt="XeroLinux" class="w-full h-auto" loading="lazy" />
+    </div>
+  </div>
+  <div class="info-card p-5">
+    <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
       I currently maintain my very own ArchLinux Distro
-      <a href="https://xerolinux.xyz" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent)] hover:underline">XeroLinux</a>.
-    </p>
-
-    <p>
-      Other than that, I do freelance as a <strong class="text-[var(--color-text-primary)]">Technical Support specialist</strong>
-      from time to time. I have landed a Job at <strong class="text-[var(--color-text-primary)]">Apple</strong> in 2019,
-      in <strong class="text-[var(--color-text-primary)]">Ireland</strong>. But it didn't last long unfortunately.
-      At least I can say that I have worked for that company LoL...
+      <a href="https://xerolinux.xyz" target="_blank" rel="noopener noreferrer"
+         class="text-[var(--color-accent)] hover:text-[var(--color-accent-light)] transition-colors hover:underline">XeroLinux</a>.
+      An innovative Arch-based distribution designed to demystify the installation process while preserving user-driven customization.
     </p>
   </div>
 </div>
