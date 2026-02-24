@@ -271,5 +271,12 @@ body {
 @media (max-width: 768px) {
   html, body {
     overflow: auto;
+    height: auto;
+  }
+
+  .tab-content-area {
+    min-height: auto;
+    overflow-y: visible;
+    flex: none;
   }
 }

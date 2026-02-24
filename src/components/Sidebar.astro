@@ -1,8 +1,20 @@
 ---
-// Left sidebar — avatar, identity, socials
+// Left sidebar — full on desktop, compact header on mobile
 ---
 
-<aside class="sidebar flex flex-col items-center px-6 py-8 gap-5 h-full">
+<!-- Mobile header: logo + name + tagline only -->
+<div class="md:hidden flex items-center gap-4 px-5 py-4 sidebar">
+  <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-[var(--color-accent-dim)] ring-2 ring-[var(--color-accent)] ring-offset-2 ring-offset-[var(--color-bg-body)] shrink-0">
+    <img src="/logo.png" alt="TechXero" class="w-full h-full object-cover" loading="eager" />
+  </div>
+  <div>
+    <h1 class="rgb-title font-[family-name:var(--font-heading)] text-lg font-bold">{'~{TechXero}~'}</h1>
+    <p class="text-[var(--color-text-secondary)] text-xs">Steve (A.K.A DarkXero)</p>
+  </div>
+</div>
+
+<!-- Desktop sidebar: full version -->
+<aside class="sidebar hidden md:flex flex-col items-center px-6 py-8 gap-5 h-full">
   <!-- Avatar -->
   <div class="relative">
     <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-[var(--color-accent-dim)] ring-2 ring-[var(--color-accent)] ring-offset-2 ring-offset-[var(--color-bg-body)]">
@@ -42,7 +54,7 @@
   <!-- Divider -->
   <div class="w-full h-px bg-[var(--color-border)]"></div>
 
-  <!-- Socials — using inline SVGs to avoid CDN issues -->
+  <!-- Socials -->
   <div class="flex flex-col w-full gap-0.5">
     <a href="https://github.com/DarkXero-dev" target="_blank" rel="noopener noreferrer" class="social-link">
       <svg class="w-4 h-4 social-icon" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
