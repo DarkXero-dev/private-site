@@ -7,13 +7,13 @@ node_modules/
 # environment variables
 .env
 .env.*
+push.sh
 
 # IDE
 .vscode/
 .idea/
 
 # OS
-push.sh
 .DS_Store
 Thumbs.db
 

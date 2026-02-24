@@ -111,6 +111,14 @@ body {
   border-bottom-color: var(--color-accent);
 }
 
+/* Hide desktop-only elements on mobile */
+@media (max-width: 767px) {
+  .desktop-only-tab,
+  .terminal-separator {
+    display: none !important;
+  }
+}
+
 /* ─── Tab Content ─── */
 .tab-panel {
   display: none;

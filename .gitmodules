@@ -1,6 +1,0 @@
-[submodule "themes/dimension"]
-	path = themes/dimension
-	url = https://github.com/your-identity/hugo-theme-dimension.git
-[submodule "themes/hugo-redirect"]
-	path = themes/hugo-redirect
-	url = https://github.com/gcc42/hugo-redirect.git
