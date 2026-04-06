@@ -1,61 +1,168 @@
 ---
-// My Story tab — personal YouTube channel content
+// My Story tab — personal narrative
 ---
 
-<div class="max-w-4xl mx-auto space-y-6">
+<div class="max-w-4xl mx-auto space-y-8">
   <h2 class="font-[family-name:var(--font-heading)] text-lg text-[var(--color-accent)]">My Story</h2>
 
-  <div class="info-card p-5 space-y-4">
-    <h3 class="font-[family-name:var(--font-heading)] text-sm font-bold text-[var(--color-text-primary)]">
-      YouTube Channel &mdash; IRL Updates
-    </h3>
+  <!-- Intro -->
+  <div class="info-card p-5">
     <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
-      I created a brand new YouTube Channel where I upload <strong class="text-[var(--color-text-primary)]">IRL Updates</strong> —
-      real, unfiltered moments from my life. Making that first video was incredibly challenging. It wasn't just about
-      hitting the record button, it was about opening up and talking about some uncomfortable, deeply personal subjects.
-      In doing so, I really laid myself bare, exposing parts of my story that I don't usually share.
-    </p>
-    <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
-      This channel is more than just a place for videos; it's a space where I hope to connect on a genuine level,
-      to be vulnerable, and to explore life's ups and downs with all of you.
-    </p>
-
-    <div class="video-wrap">
-      <iframe
-        src="https://www.youtube.com/embed/wlk_NLJO3lM"
-        title="Life in Lebanon"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
-    </div>
-
-    <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
-      Living in Lebanon has been incredibly difficult, especially in recent years. I used to work for
-      <strong class="text-[var(--color-text-primary)]">Apple</strong> in <strong class="text-[var(--color-text-primary)]">Ireland</strong>,
-      but even then, I struggled with depression and financial difficulties because of the high cost of living.
-      After the <strong class="text-[var(--color-text-primary)]">Beirut port explosion</strong>, I tried to take
-      leave to support my family, but that was a challenge in itself.
-    </p>
-    <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
-      I remember hearing the explosion live as I was on the phone with my father — it was a terrifying and traumatic
-      moment. Eventually, I returned home despite the currency devaluation, which wiped out more than 90% of the
-      Lebanese pound's value and cut salaries drastically. Finding work locally has been almost impossible despite
-      my experience, and everyday life has only gotten harder.
-    </p>
-    <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
-      Through every hardship, I hold onto the belief that persistence and honesty can pave the way for better days.
-      My journey is far from over, and every small step forward is a victory worth celebrating. I am grateful for
-      the support I have received so far and hopeful for the future — that creativity, community, and courage can
-      thrive even in the toughest circumstances.
+      Life doesn't always go the way you plan it. Mine has taken me from
+      <strong class="text-[var(--color-text-primary)]">Lebanon</strong> to
+      <strong class="text-[var(--color-text-primary)]">Ireland</strong> and back again,
+      through moments of hope and stretches of real hardship. This is that story -
+      no filter, no sugarcoating.
     </p>
   </div>
 
-  <!-- Subscribe — centered -->
-  <div class="flex justify-center">
-    <a href="https://www.youtube.com/@TechXeroLB" target="_blank" rel="noopener noreferrer"
-       class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-[var(--color-accent)] rounded-lg hover:bg-[var(--color-accent-light)] transition-colors">
-      <svg class="w-4 h-4" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" stroke="none" fill="currentColor"/></svg>
-      Subscribe on YouTube
+  <!-- Ireland & Apple -->
+  <div class="space-y-3">
+    <h3 class="font-[family-name:var(--font-heading)] text-sm text-[var(--color-accent)] uppercase tracking-widest">
+      Chasing the Dream
+    </h3>
+    <div class="info-card p-5 space-y-4">
+      <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+        In 2019 I landed a job at <strong class="text-[var(--color-text-primary)]">Apple</strong> in
+        <strong class="text-[var(--color-text-primary)]">Cork, Ireland</strong>. On paper it was the dream,
+        but reality hit different. The cost of living was brutal, and behind the scenes I was battling
+        <strong class="text-[var(--color-text-primary)]">depression</strong> and constant financial pressure.
+        The job didn't last long, and I found myself back at square one - far from home and running on empty.
+      </p>
+    </div>
+  </div>
+
+  <!-- The Explosion -->
+  <div class="space-y-3">
+    <h3 class="font-[family-name:var(--font-heading)] text-sm text-[var(--color-accent)] uppercase tracking-widest">
+      August 4, 2020
+    </h3>
+    <div class="info-card p-5 space-y-4">
+      <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+        I was on the phone with my father when the
+        <strong class="text-[var(--color-text-primary)]">Beirut port explosion</strong> happened.
+        I heard it live. That sound, the silence that followed, and the panic - it's something
+        that never really leaves you. I tried to get leave to come home and support my family,
+        but even that was a fight.
+      </p>
+      <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+        Eventually I made it back to Lebanon, knowing full well what I was walking into.
+        The currency had already lost over <strong class="text-[var(--color-text-primary)]">90% of its value</strong>.
+        Salaries were decimated. The country I grew up in was barely recognizable.
+      </p>
+    </div>
+  </div>
+
+  <!-- Life in Lebanon — with video -->
+  <div class="space-y-3">
+    <h3 class="font-[family-name:var(--font-heading)] text-sm text-[var(--color-accent)] uppercase tracking-widest">
+      Life in Lebanon
+    </h3>
+    <div class="info-card p-5 space-y-4">
+      <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+        Finding work here has been nearly impossible despite years of experience.
+        Every day is a grind - power cuts, inflation, uncertainty.
+        But it's home, and the people I love are here.
+        I opened up about all of this on camera, which was one of the hardest things I've ever done.
+      </p>
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/wlk_NLJO3lM"
+          title="Life in Lebanon"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="flex justify-center pt-2">
+        <a href="https://www.youtube.com/@TechXeroLB" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-[var(--color-accent)] rounded-lg hover:bg-[var(--color-accent-light)] transition-colors">
+          <svg class="w-4 h-4" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" stroke="none" fill="currentColor"/></svg>
+          Follow on YouTube
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- A Country in Collapse -->
+  <div class="space-y-3">
+    <h3 class="font-[family-name:var(--font-heading)] text-sm text-[var(--color-accent)] uppercase tracking-widest">
+      A Country in Collapse
+    </h3>
+    <div class="info-card p-5 space-y-4">
+      <div class="rounded-lg overflow-hidden">
+        <img src="https://i.postimg.cc/yYGBpRwP/2024-10-22t095104z-239348049-rc2lpaapu7qs-rtrmadp-3-israel-palestinians-lebanon.jpg"
+             alt="Aftermath of destruction in Lebanon"
+             class="w-full h-auto"
+             loading="lazy" />
+      </div>
+      <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+        Lebanon isn't in decline. It's in active collapse. The infrastructure, the economy, basic stability,
+        all of it has deteriorated beyond recognition. As of <strong class="text-[var(--color-text-primary)]">March 2026</strong> war started once again,
+        explosions that were once distant background noise are now close enough to feel. Food scarcity is getting worse by the week.
+        You don't plan meals around what you want anymore, you plan around what's available.
+      </p>
+      <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+        I'm Greek by nationality, born and raised in Lebanon. Growing up I'd hear family stories about the islands,
+        olive trees, and the Mediterranean light. I have Greek citizenship but I've always lived as Lebanese in practice.
+        That dual identity used to be enough. It isn't anymore.
+      </p>
+      <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+        I've tried twice before to raise enough to relocate permanently. Both times, the funds helped
+        short-term but weren't enough for the full move. A year of job applications from here has led nowhere.
+        Time zones, instability, and employer hesitancy make it nearly impossible to land something remotely.
+        Each passing week the window gets smaller, financially, logistically, and mentally.
+      </p>
+    </div>
+  </div>
+
+  <!-- The Move -->
+  <div class="space-y-3">
+    <h3 class="font-[family-name:var(--font-heading)] text-sm text-[var(--color-accent)] uppercase tracking-widest">
+      The Move
+    </h3>
+    <div class="info-card p-5 space-y-4">
+      <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+        I've given Lebanon too much of my life. Years of patience, waiting for things to get better,
+        waiting for something to change, and nothing has. I'm slowly rotting away here, and my sanity
+        is slipping. So I've made a decision: <strong class="text-[var(--color-text-primary)]">it's time to stop waiting and do</strong>.
+      </p>
+      <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+        By the end of April 2026, if I raise enough, I'm leaving for
+        <strong class="text-[var(--color-text-primary)]">Serbia</strong>, my sister's place.
+        This time I'm not coming back. I'll stay there as long as it takes until I find a job in
+        <strong class="text-[var(--color-text-primary)]">Greece</strong>, then move there permanently.
+      </p>
+      <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+        I don't care about my stuff here anymore. Life matters more than things. I'm leaving everything behind
+        except the essentials. Meanwhile I'll have to double down on
+        <a href="https://xerolinux.xyz" target="_blank" rel="noopener noreferrer"
+           class="text-[var(--color-accent)] hover:text-[var(--color-accent-light)] transition-colors hover:underline">XeroLinux</a>
+        to keep making some income while I'm away. Can't survive without it.
+      </p>
+      <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+        Through all of it, I never stopped building. I pour myself into tech, into the things that keep me going.
+        I'm grateful for every bit of support along the way, and I genuinely believe that
+        persistence, honesty, and a stubborn refusal to quit can get you through just about anything.
+      </p>
+      <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed italic">
+        Do or do not. There is no try.
+      </p>
+      <div class="flex justify-center pt-2">
+        <a href="https://fundrazr.com/xerolinux" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-500 transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+          Support the Move
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- XeroBytes link -->
+  <div class="flex justify-end">
+    <a href="https://bytes.xerolinux.xyz/posts/the-move/" target="_blank" rel="noopener noreferrer"
+       class="inline-flex items-center gap-2 text-xs font-medium text-[var(--color-accent)] hover:text-[var(--color-accent-light)] transition-colors hover:underline">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+      Read the full post on XeroBytes
     </a>
   </div>
 </div>

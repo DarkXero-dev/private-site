@@ -3,7 +3,6 @@ import Layout from '../components/layout/Layout.astro';
 import Footer from '../components/layout/Footer.astro';
 import Sidebar from '../components/Sidebar.astro';
 import TabAbout from '../components/tabs/TabAbout.astro';
-import TabInterests from '../components/tabs/TabInterests.astro';
 import TabSpecs from '../components/tabs/TabSpecs.astro';
 import TabMyStory from '../components/tabs/TabMyStory.astro';
 import TabVault from '../components/tabs/TabVault.astro';
@@ -12,7 +11,6 @@ import TabContact from '../components/tabs/TabContact.astro';
 
 const tabs = [
   { id: 'about', label: 'About' },
-  { id: 'interests', label: 'Interests' },
   { id: 'specs', label: 'Rig' },
   { id: 'cv', label: 'Résumé' },
   { id: 'mystory', label: 'My Story' },
@@ -50,9 +48,6 @@ const tabs = [
         <div id="panel-about" class="tab-panel active">
           <TabAbout />
         </div>
-        <div id="panel-interests" class="tab-panel h-full">
-          <TabInterests />
-        </div>
         <div id="panel-specs" class="tab-panel h-full">
           <TabSpecs />
         </div>
@@ -81,22 +76,39 @@ const tabs = [
     const panels = document.querySelectorAll<HTMLDivElement>('.tab-panel');
     const contentArea = document.querySelector('.tab-content-area');
 
+    function switchTab(tabId: string) {
+      const targetBtn = Array.from(buttons).find(b => b.dataset.tab === tabId);
+      if (!targetBtn) return;
+
+      buttons.forEach((b) => b.classList.remove('active'));
+      targetBtn.classList.add('active');
+
+      panels.forEach((p) => {
+        p.classList.remove('active');
+        if (p.id === `panel-${tabId}`) {
+          p.classList.add('active');
+        }
+      });
+
+      if (contentArea) contentArea.scrollTop = 0;
+    }
+
     buttons.forEach((btn) => {
       btn.addEventListener('click', () => {
-        const target = btn.dataset.tab;
-
-        buttons.forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        panels.forEach((p) => {
-          p.classList.remove('active');
-          if (p.id === `panel-${target}`) {
-            p.classList.add('active');
-          }
-        });
-
-        if (contentArea) contentArea.scrollTop = 0;
+        const target = btn.dataset.tab!;
+        switchTab(target);
+        history.replaceState(null, '', `#${target}`);
       });
+    });
+
+    // Deep link: activate tab from URL hash on load
+    const hash = window.location.hash.slice(1);
+    if (hash) switchTab(hash);
+
+    // Handle back/forward navigation
+    window.addEventListener('hashchange', () => {
+      const h = window.location.hash.slice(1);
+      if (h) switchTab(h);
     });
   </script>
 </Layout>
