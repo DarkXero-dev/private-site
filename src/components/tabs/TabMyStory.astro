@@ -66,12 +66,15 @@
         I opened up about all of this on camera, which was one of the hardest things I've ever done.
       </p>
       <div class="video-wrap">
-        <iframe
-          src="https://www.youtube.com/embed/wlk_NLJO3lM"
-          title="Life in Lebanon"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+        <div id="yt-player" class="yt-thumb" role="button" tabindex="0" aria-label="Play video: Life in Lebanon">
+          <img src="https://img.youtube.com/vi/wlk_NLJO3lM/maxresdefault.jpg"
+               alt="Life in Lebanon – video thumbnail"
+               class="w-full h-full object-cover" />
+          <svg class="yt-play-btn" viewBox="0 0 68 48" width="68" height="48">
+            <path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.63-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="rgba(0,0,0,.7)"/>
+            <path d="M45 24L27 14v20" fill="#fff"/>
+          </svg>
+        </div>
       </div>
       <div class="flex justify-center pt-2">
         <a href="https://www.youtube.com/@TechXeroLB" target="_blank" rel="noopener noreferrer"
@@ -166,3 +169,22 @@
     </a>
   </div>
 </div>
+
+<script>
+  const thumb = document.getElementById('yt-player');
+  if (thumb) {
+    const play = () => {
+      const wrap = thumb.parentElement!;
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/wlk_NLJO3lM?autoplay=1';
+      iframe.title = 'Life in Lebanon';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      wrap.replaceChild(iframe, thumb);
+    };
+    thumb.addEventListener('click', play);
+    thumb.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') play();
+    });
+  }
+</script>

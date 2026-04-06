@@ -199,13 +199,40 @@ body {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-.video-wrap iframe {
+.video-wrap iframe,
+.video-wrap .yt-thumb {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   border: 0;
+}
+
+.yt-thumb {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.yt-thumb img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.yt-play-btn {
+  position: relative;
+  z-index: 1;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.yt-thumb:hover .yt-play-btn {
+  opacity: 1;
 }
 
 /* ─── Spec Row ─── */
