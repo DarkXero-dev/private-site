@@ -62,15 +62,36 @@
 
       <!-- Status bar -->
       <div class="flex flex-wrap gap-x-6 gap-y-1 px-4 py-2.5 shrink-0 border-b border-[var(--color-border)] text-[var(--color-text-muted)]">
-        <span><span class="text-[var(--color-accent)]">TZ</span> Asia/Beirut (GMT+2)</span>
+        <span><span class="text-[var(--color-accent)]">TZ</span> <span id="status-tz">Europe/Belgrade (GMT+1)</span></span>
         <span><span class="text-[var(--color-accent)]">LOCAL</span> <span id="live-clock">--:--:--</span></span>
         <span><span class="text-[var(--color-accent)]">STATUS</span> <span class="text-[#4ade80]">● online</span></span>
-        <span><span class="text-[var(--color-accent)]">LOC</span> Beit-Meri, Lebanon</span>
+        <span><span class="text-[var(--color-accent)]">LOC</span> <span id="status-loc">Novi Sad, Serbia</span></span>
       </div>
 
       <!-- Weather fills rest -->
       <div id="weather-box" class="flex-1 flex flex-col px-4 py-3 text-[var(--color-text-muted)]">
-        <div class="text-[#4ade80] mb-2 shrink-0">$ curl wttr.in/Beit-Meri</div>
+        <!-- Manual search row — hidden until auto-detect fails -->
+        <div id="weather-search-row" class="hidden">
+          <div class="flex items-center gap-2 shrink-0">
+            <span class="text-[#4ade80]">$</span>
+            <span class="text-[#4ade80]">weather</span>
+            <span class="text-[var(--color-text-muted)]">--location</span>
+            <form id="weather-location-form" class="flex items-center gap-1 flex-1 min-w-0">
+              <input
+                id="weather-location-input"
+                type="text"
+                autocomplete="off"
+                spellcheck="false"
+                class="bg-transparent outline-none text-[#e6edf3] font-[family-name:var(--font-mono)] text-[11px] flex-1 min-w-0 caret-[var(--color-accent)] border-b border-[var(--color-accent)]/50 focus:border-[var(--color-accent)] transition-colors pb-px"
+                placeholder="Enter your city to see local weather"
+              />
+              <button type="submit" class="text-[var(--color-accent)] hover:text-[#e6edf3] text-[10px] transition-colors shrink-0">[↵]</button>
+              <button type="button" id="weather-geolocate" title="Try detecting again" class="text-[var(--color-accent)] hover:text-[#e6edf3] text-[11px] transition-colors shrink-0 ml-1">📍</button>
+            </form>
+          </div>
+          <div class="text-[10px] text-[var(--color-text-muted)]/60 mb-2 shrink-0 pl-4">✎ type a city or 📍 try detecting again</div>
+        </div>
+        <div id="weather-status" class="text-[10px] text-[var(--color-text-muted)] mb-1 shrink-0 hidden"></div>
         <div id="weather-content" class="flex-1 flex flex-col">
           <span class="text-[var(--color-text-muted)]">Fetching weather data...</span>
         </div>
@@ -83,119 +104,144 @@
 </div>
 
 <script>
-  // Live clock
+  // Live clock — timezone updated dynamically once weather loads
   const clockEl = document.getElementById('live-clock');
-  if (clockEl) {
-    function updateClock() {
-      clockEl.textContent = new Date().toLocaleTimeString('en-GB', { timeZone: 'Asia/Beirut', hour12: false });
-    }
-    updateClock();
-    setInterval(updateClock, 1000);
-  }
+  window._clockInterval = clockEl
+    ? setInterval(() => { clockEl.textContent = new Date().toLocaleTimeString('en-GB', { timeZone: 'Europe/Belgrade', hour12: false }); }, 1000)
+    : null;
+  if (clockEl) clockEl.textContent = new Date().toLocaleTimeString('en-GB', { timeZone: 'Europe/Belgrade', hour12: false });
 
-  // Weather — rendered as full-width HTML
+  // Weather
   const wBox = document.getElementById('weather-content');
+  const wStatus = document.getElementById('weather-status');
+  const wInput = document.getElementById('weather-location-input');
+  const wForm = document.getElementById('weather-location-form');
+  const wSearchRow = document.getElementById('weather-search-row');
+  const statusTZ = document.getElementById('status-tz');
+  const statusLOC = document.getElementById('status-loc');
+
+  const showSearchRow = () => wSearchRow?.classList.remove('hidden');
+  const hideSearchRow = () => wSearchRow?.classList.add('hidden');
+
+  const updateStatusBar = (label, timezone, tzAbbr, utcOffsetSec) => {
+    if (statusLOC) statusLOC.textContent = label;
+    if (statusTZ && timezone) {
+      const hrs = Math.round(utcOffsetSec / 3600);
+      const sign = hrs >= 0 ? '+' : '-';
+      statusTZ.textContent = `${timezone} (GMT${sign}${Math.abs(hrs)})`;
+    }
+  };
+
   if (wBox && window.innerWidth >= 1024) {
-    fetch('https://wttr.in/Beit-Meri+Lebanon?format=j1')
-      .then(r => { if (!r.ok) throw new Error('fail'); return r.json(); })
-      .then(data => {
-        const c = data.current_condition[0];
-        const a = data.nearest_area[0];
-        const t = data.weather[0];
-        const t2 = data.weather[1];
-        const t3 = data.weather[2];
+    const WMO_DESC = {
+      0:'Clear sky', 1:'Mainly clear', 2:'Partly cloudy', 3:'Overcast',
+      45:'Foggy', 48:'Icy fog',
+      51:'Light drizzle', 53:'Drizzle', 55:'Heavy drizzle',
+      56:'Freezing drizzle', 57:'Heavy freezing drizzle',
+      61:'Slight rain', 63:'Moderate rain', 65:'Heavy rain',
+      66:'Freezing rain', 67:'Heavy freezing rain',
+      71:'Slight snow', 73:'Moderate snow', 75:'Heavy snow', 77:'Snow grains',
+      80:'Slight showers', 81:'Showers', 82:'Violent showers',
+      85:'Slight snow showers', 86:'Heavy snow showers',
+      95:'Thunderstorm', 96:'Thunderstorm + hail', 99:'Heavy thunderstorm + hail'
+    };
+    const wmoArt = (code) => {
+      if (code <= 1)  return ['    \\   /    ','     .-.     ','  ― (   ) ―  ','     `-\'     ','    /   \\    '];
+      if (code === 2) return ['   \\  /      ',' _ /"".--.   ','   \\_(   ).  ','   /(___(__) ','             '];
+      if (code === 3 || code === 45 || code === 48) return ['             ','     .--.    ','  .-(    ).  ',' (___.__)__) ','             '];
+      if ([71,73,75,77,85,86].includes(code)) return ['     .-.     ','    (   ).   ','   (___(__)  ','   * * * *   ','  * * * *    '];
+      if ([95,96,99].includes(code)) return ['     .-.     ','    (   ).   ','   (___(__)  ','  ⚡ʻ‚⚡ʻ‚   ','   ‚ʻ‚ʻ‚ʻ   '];
+      return ['     .-.     ','    (   ).   ','   (___(__)  ','   ‚ʻ‚ʻ‚ʻ   ','   ‚ʻ‚ʻ‚ʻ   '];
+    };
+    const degToDir = (d) => {
+      const dirs = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+      return dirs[Math.round(d / 22.5) % 16];
+    };
+    const fmtTime = (iso) => iso ? iso.split('T')[1] : '--:--';
+    const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
-        const city = a.areaName[0].value;
-        const region = a.region[0].value;
-        const country = a.country[0].value;
-        const desc = c.weatherDesc[0].value;
-        const code = parseInt(c.weatherCode);
-        const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-        const now = new Date();
+    const setStatus = (msg, isErr = false) => {
+      if (!wStatus) return;
+      wStatus.textContent = msg;
+      wStatus.className = `text-[10px] mb-1 shrink-0 ${msg ? '' : 'hidden'} ${isErr ? 'text-[#f87171]' : 'text-[var(--color-text-muted)]'}`;
+    };
 
-        // ASCII art
-        let art;
-        if (code === 113) art = ['    \\   /    ','     .-.     ','  ― (   ) ―  ','     `-\'     ','    /   \\    '];
-        else if (code === 116 || code === 119) art = ['   \\  /      ',' _ /"".--.   ','   \\_(   ).  ','   /(___(__) ','             '];
-        else if ([176,263,266,293,296,299,302,305,308,311,314,353,356,359].includes(code)) art = ['     .-.     ','    (   ).   ','   (___(__)  ','   ‚ʻ‚ʻ‚ʻ   ','   ‚ʻ‚ʻ‚ʻ   '];
-        else if ([200,386,389,392,395].includes(code)) art = ['     .-.     ','    (   ).   ','   (___(__)  ','  ⚡ʻ‚⚡ʻ‚   ','   ‚ʻ‚ʻ‚ʻ   '];
-        else if ([227,230,323,326,329,332,335,338,368,371].includes(code)) art = ['     .-.     ','    (   ).   ','   (___(__)  ','   * * * *   ','  * * * *    '];
-        else art = ['   \\  /      ',' _ /"".--.   ','   \\_(   ).  ','   /(___(__) ','             '];
+    const renderWeather = (data, label) => {
+      updateStatusBar(label, data.timezone, data.timezone_abbreviation, data.utc_offset_seconds);
+      if (clockEl && data.timezone) {
+        clearInterval(window._clockInterval);
+        window._clockInterval = setInterval(() => {
+          clockEl.textContent = new Date().toLocaleTimeString('en-GB', { timeZone: data.timezone, hour12: false });
+        }, 1000);
+        clockEl.textContent = new Date().toLocaleTimeString('en-GB', { timeZone: data.timezone, hour12: false });
+      }
+      hideSearchRow();
+      const c = data.current;
+      const d = data.daily;
+      const code = c.weather_code;
+      const desc = WMO_DESC[code] || 'Unknown';
+      const art = wmoArt(code);
+      const mk = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html) e.innerHTML = html; return e; };
 
-        const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html) e.innerHTML = html; return e; };
+      wBox.innerHTML = '';
+      const sep = () => mk('div', 'w-full h-px bg-[var(--color-border)] my-2');
 
-        wBox.innerHTML = '';
+      wBox.appendChild(mk('div', 'text-[#e6edf3] font-bold mb-2', `Weather report: ${label}`));
+      wBox.appendChild(sep());
 
-        // Header
-        const hdr = el('div', 'text-[#e6edf3] font-bold mb-2', `Weather report: ${city}, ${region}, ${country}`);
-        wBox.appendChild(hdr);
+      const row = mk('div', 'flex gap-4 items-start w-full my-1');
+      const artBox = mk('pre', 'text-[#facc15] shrink-0 leading-[1.4]', art.join('\n'));
+      artBox.style.fontSize = '11px';
+      const details = mk('div', 'flex-1 grid grid-cols-2 gap-x-4 gap-y-1');
+      details.innerHTML = `
+        <div><span class="text-[var(--color-accent)]">Condition</span> <span class="text-[#e6edf3]">${desc}</span></div>
+        <div><span class="text-[var(--color-accent)]">Temp</span> <span class="text-[#e6edf3]">${c.temperature_2m}°C</span> <span class="text-[var(--color-text-muted)]">(feels ${c.apparent_temperature}°C)</span></div>
+        <div><span class="text-[var(--color-accent)]">Wind</span> <span class="text-[#e6edf3]">${c.wind_speed_10m} km/h ${degToDir(c.wind_direction_10m)}</span></div>
+        <div><span class="text-[var(--color-accent)]">Humidity</span> <span class="text-[#e6edf3]">${c.relative_humidity_2m}%</span></div>
+        <div><span class="text-[var(--color-accent)]">Pressure</span> <span class="text-[#e6edf3]">${c.surface_pressure} hPa</span></div>
+        <div><span class="text-[var(--color-accent)]">UV Index</span> <span class="text-[#e6edf3]">${Math.round(c.uv_index)}</span></div>
+        <div><span class="text-[var(--color-accent)]">Visibility</span> <span class="text-[#e6edf3]">${(c.visibility / 1000).toFixed(1)} km</span></div>
+        <div><span class="text-[var(--color-accent)]">Clouds</span> <span class="text-[#e6edf3]">${c.cloud_cover}%</span></div>
+      `;
+      row.appendChild(artBox);
+      row.appendChild(details);
+      wBox.appendChild(row);
+      wBox.appendChild(sep());
 
-        // Full-width separator
-        const sep = () => { const s = el('div', 'w-full h-px bg-[var(--color-border)] my-2'); return s; };
-        wBox.appendChild(sep());
-
-        // Current conditions: art left + details right, full width
-        const row = el('div', 'flex gap-4 items-start w-full my-1');
-        const artBox = el('pre', 'text-[#facc15] shrink-0 leading-[1.4]', art.join('\n'));
-        artBox.style.fontSize = '11px';
-        const details = el('div', 'flex-1 grid grid-cols-2 gap-x-4 gap-y-1');
-        details.innerHTML = `
-          <div><span class="text-[var(--color-accent)]">Condition</span> <span class="text-[#e6edf3]">${desc}</span></div>
-          <div><span class="text-[var(--color-accent)]">Temp</span> <span class="text-[#e6edf3]">${c.temp_C}°C</span> <span class="text-[var(--color-text-muted)]">(feels ${c.FeelsLikeC}°C)</span></div>
-          <div><span class="text-[var(--color-accent)]">Wind</span> <span class="text-[#e6edf3]">${c.windspeedKmph} km/h ${c.winddir16Point}</span></div>
-          <div><span class="text-[var(--color-accent)]">Humidity</span> <span class="text-[#e6edf3]">${c.humidity}%</span></div>
-          <div><span class="text-[var(--color-accent)]">Pressure</span> <span class="text-[#e6edf3]">${c.pressure} hPa</span></div>
-          <div><span class="text-[var(--color-accent)]">UV Index</span> <span class="text-[#e6edf3]">${c.uvIndex}</span></div>
-          <div><span class="text-[var(--color-accent)]">Visibility</span> <span class="text-[#e6edf3]">${c.visibility} km</span></div>
-          <div><span class="text-[var(--color-accent)]">Clouds</span> <span class="text-[#e6edf3]">${c.cloudcover}%</span></div>
+      wBox.appendChild(mk('div', 'text-[var(--color-accent)] text-[10px] uppercase tracking-widest mb-1', 'Forecast'));
+      const fTable = mk('div', 'w-full grid grid-cols-[auto_1fr_1fr_1fr] gap-x-4 gap-y-0.5');
+      d.time.forEach((date, i) => {
+        const dayName = i === 0 ? 'Today' : days[new Date(date + 'T12:00:00').getDay()];
+        fTable.innerHTML += `
+          <span class="text-[#e6edf3]">${dayName}</span>
+          <span><span class="text-[#4ade80]">↑ ${d.temperature_2m_max[i]}°C</span></span>
+          <span><span class="text-[#22d3ee]">↓ ${d.temperature_2m_min[i]}°C</span></span>
+          <span class="text-[var(--color-text-muted)]">${WMO_DESC[d.weather_code[i]] || 'Unknown'}</span>
         `;
-        row.appendChild(artBox);
-        row.appendChild(details);
-        wBox.appendChild(row);
+      });
+      wBox.appendChild(fTable);
+      wBox.appendChild(sep());
 
-        wBox.appendChild(sep());
+      const aRow = mk('div', 'w-full grid grid-cols-2 gap-x-4 gap-y-0.5');
+      aRow.innerHTML = `
+        <div><span class="text-[var(--color-accent)]">Sunrise</span> <span class="text-[#e6edf3]">${fmtTime(d.sunrise[0])}</span></div>
+        <div><span class="text-[var(--color-accent)]">Sunset</span> <span class="text-[#e6edf3]">${fmtTime(d.sunset[0])}</span></div>
+      `;
+      wBox.appendChild(aRow);
 
-        // Forecast — full width table
-        const fLabel = el('div', 'text-[var(--color-accent)] text-[10px] uppercase tracking-widest mb-1', 'Forecast');
-        wBox.appendChild(fLabel);
+      const foot = mk('div', 'mt-auto pt-2 text-[10px] text-[var(--color-text-muted)] flex justify-between w-full');
+      foot.innerHTML = `<span>${data.latitude.toFixed(4)}°N, ${data.longitude.toFixed(4)}°E</span><span>Updated: ${fmtTime(c.time)} local</span>`;
+      wBox.appendChild(foot);
+    };
 
-        const forecasts = [t, t2, t3].filter(Boolean);
-        const fTable = el('div', 'w-full grid grid-cols-[auto_1fr_1fr_1fr] gap-x-4 gap-y-0.5');
-        forecasts.forEach((f, i) => {
-          const d = i === 0 ? now : new Date(f.date + 'T12:00:00');
-          const dayName = i === 0 ? 'Today' : days[d.getDay()];
-          const fDesc = f.hourly[4].weatherDesc[0].value;
-          fTable.innerHTML += `
-            <span class="text-[#e6edf3]">${dayName}</span>
-            <span><span class="text-[#4ade80]">↑ ${f.maxtempC}°C</span></span>
-            <span><span class="text-[#22d3ee]">↓ ${f.mintempC}°C</span></span>
-            <span class="text-[var(--color-text-muted)]">${fDesc}</span>
-          `;
-        });
-        wBox.appendChild(fTable);
-
-        wBox.appendChild(sep());
-
-        // Astronomy — full width
-        const astro = t.astronomy[0];
-        const aRow = el('div', 'w-full grid grid-cols-2 gap-x-4 gap-y-0.5');
-        aRow.innerHTML = `
-          <div><span class="text-[var(--color-accent)]">Sunrise</span> <span class="text-[#e6edf3]">${astro.sunrise}</span></div>
-          <div><span class="text-[var(--color-accent)]">Sunset</span> <span class="text-[#e6edf3]">${astro.sunset}</span></div>
-          <div><span class="text-[var(--color-accent)]">Moonrise</span> <span class="text-[#e6edf3]">${astro.moonrise}</span></div>
-          <div><span class="text-[var(--color-accent)]">Moon</span> <span class="text-[#e6edf3]">${astro.moon_phase}</span></div>
-        `;
-        wBox.appendChild(aRow);
-
-        // Footer
-        const foot = el('div', 'mt-auto pt-2 text-[10px] text-[var(--color-text-muted)] flex justify-between w-full');
-        foot.innerHTML = `<span>${a.latitude}°N, ${a.longitude}°E</span><span>Updated: ${c.observation_time} UTC</span>`;
-        wBox.appendChild(foot);
-      })
-      .catch(() => {
-        wBox.innerHTML = `
-          <pre class="text-[var(--color-text-muted)] whitespace-pre">
-  Weather report: Beit-Meri, Mont-Liban, Lebanon
+    const fetchWeather = (lat, lon, label, timezone = 'auto') => {
+      wBox.innerHTML = '<span class="text-[var(--color-text-muted)]">Fetching weather data...</span>';
+      fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,surface_pressure,cloud_cover,visibility,uv_index&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=${timezone}&forecast_days=3`)
+        .then(r => { if (!r.ok) throw new Error('fail'); return r.json(); })
+        .then(data => { setStatus(''); renderWeather(data, label); })
+        .catch(() => {
+          wBox.innerHTML = `<pre class="text-[var(--color-text-muted)] whitespace-pre">
+  Weather report: ${label}
 
        \\   /      Conditions:   --
         .-.       Temperature:  --°C
@@ -203,8 +249,102 @@
         \`-'       Humidity:     --%
        /   \\      Visibility:   -- km
 
-  Weather data temporarily unavailable.
-  Try: curl wttr.in/Beit-Meri</pre>`;
+  Weather data temporarily unavailable.</pre>`;
+        });
+    };
+
+    const geocodeAndFetch = (query) => {
+      setStatus('Resolving location...');
+      wBox.innerHTML = '<span class="text-[var(--color-text-muted)]">Resolving location...</span>';
+      fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=1&language=en&format=json`)
+        .then(r => r.json())
+        .then(geo => {
+          if (!geo.results?.length) { setStatus(`Location not found: "${query}"`, true); wBox.innerHTML = ''; return; }
+          const loc = geo.results[0];
+          const label = [loc.name, loc.admin1, loc.country].filter(Boolean).join(', ');
+          localStorage.setItem('weather_lat', loc.latitude);
+          localStorage.setItem('weather_lon', loc.longitude);
+          localStorage.setItem('weather_label', label);
+          localStorage.setItem('weather_tz', loc.timezone || 'auto');
+          if (wInput) wInput.value = '';
+          setStatus('');
+          hideSearchRow();
+          fetchWeather(loc.latitude, loc.longitude, label, loc.timezone || 'auto');
+        })
+        .catch(() => setStatus('Geocoding failed. Try again.', true));
+    };
+
+    const applyLocation = (lat, lon) => {
+      setStatus('Resolving city name...');
+      fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`)
+        .then(r => r.json())
+        .then(geo => {
+          const city = geo.city || geo.locality || geo.principalSubdivision || 'Unknown';
+          const region = geo.principalSubdivision || '';
+          const country = geo.countryName || '';
+          const label = [city, region !== city ? region : '', country].filter(Boolean).join(', ');
+          localStorage.setItem('weather_lat', lat);
+          localStorage.setItem('weather_lon', lon);
+          localStorage.setItem('weather_label', label);
+          localStorage.setItem('weather_tz', 'auto');
+          if (wInput) wInput.value = '';
+          setStatus('');
+          fetchWeather(lat, lon, label, 'auto');
+        })
+        .catch(() => { fetchWeather(lat, lon, `${lat.toFixed(2)}°N, ${lon.toFixed(2)}°E`, 'auto'); setStatus(''); });
+    };
+
+    const ipFallback = () => {
+      setStatus('Detecting location via IP...');
+      fetch('https://ipapi.co/json/')
+        .then(r => r.json())
+        .then(d => {
+          if (!d.latitude) throw new Error('no coords');
+          applyLocation(d.latitude, d.longitude);
+        })
+        .catch(() => {
+          setStatus('Could not detect location — enter your city below.', true);
+          wBox.innerHTML = '';
+          showSearchRow();
+          wInput?.focus();
+        });
+    };
+
+    const geolocateAndFetch = () => {
+      setStatus('Detecting your location...');
+      wBox.innerHTML = '<span class="text-[var(--color-text-muted)]">Detecting your location...</span>';
+      if (!navigator.geolocation) { ipFallback(); return; }
+      navigator.geolocation.getCurrentPosition(
+        (pos) => applyLocation(pos.coords.latitude, pos.coords.longitude),
+        () => ipFallback(),
+        { timeout: 8000, enableHighAccuracy: false, maximumAge: 300000 }
+      );
+    };
+
+    // Form submit handler
+    if (wForm) {
+      wForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const q = wInput?.value.trim();
+        if (q) geocodeAndFetch(q);
       });
+    }
+
+    // 📍 button
+    document.getElementById('weather-geolocate')?.addEventListener('click', geolocateAndFetch);
+
+    // Load: saved → auto-detect (first visit) → default
+    const savedLat = localStorage.getItem('weather_lat');
+    const savedLon = localStorage.getItem('weather_lon');
+    const savedLabel = localStorage.getItem('weather_label');
+    const savedTz = localStorage.getItem('weather_tz');
+    if (savedLat && savedLon && savedLabel) {
+      if (wInput) wInput.value = '';
+      fetchWeather(parseFloat(savedLat), parseFloat(savedLon), savedLabel, savedTz || 'auto');
+    } else if (navigator.geolocation) {
+      geolocateAndFetch();
+    } else {
+      fetchWeather(45.2671, 19.8335, 'Novi Sad, Vojvodina, Serbia', 'Europe/Belgrade');
+    }
   }
 </script>
