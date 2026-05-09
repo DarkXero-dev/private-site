@@ -62,34 +62,36 @@
 
       <!-- Status bar -->
       <div class="flex flex-wrap gap-x-6 gap-y-1 px-4 py-2.5 shrink-0 border-b border-[var(--color-border)] text-[var(--color-text-muted)]">
-        <span><span class="text-[var(--color-accent)]">TZ</span> <span id="status-tz">Europe/Belgrade (GMT+1)</span></span>
+        <span><span class="text-[var(--color-accent)]">TZ</span> <span id="status-tz">--</span></span>
         <span><span class="text-[var(--color-accent)]">LOCAL</span> <span id="live-clock">--:--:--</span></span>
         <span><span class="text-[var(--color-accent)]">STATUS</span> <span class="text-[#4ade80]">● online</span></span>
-        <span><span class="text-[var(--color-accent)]">LOC</span> <span id="status-loc">Novi Sad, Serbia</span></span>
+        <span><span class="text-[var(--color-accent)]">LOC</span> <span id="status-loc">--</span></span>
       </div>
 
       <!-- Weather fills rest -->
       <div id="weather-box" class="flex-1 flex flex-col px-4 py-3 text-[var(--color-text-muted)]">
-        <!-- Manual search row — hidden until auto-detect fails -->
-        <div id="weather-search-row" class="hidden">
-          <div class="flex items-center gap-2 shrink-0">
-            <span class="text-[#4ade80]">$</span>
-            <span class="text-[#4ade80]">weather</span>
-            <span class="text-[var(--color-text-muted)]">--location</span>
-            <form id="weather-location-form" class="flex items-center gap-1 flex-1 min-w-0">
-              <input
-                id="weather-location-input"
-                type="text"
-                autocomplete="off"
-                spellcheck="false"
-                class="bg-transparent outline-none text-[#e6edf3] font-[family-name:var(--font-mono)] text-[11px] flex-1 min-w-0 caret-[var(--color-accent)] border-b border-[var(--color-accent)]/50 focus:border-[var(--color-accent)] transition-colors pb-px"
-                placeholder="Enter your city to see local weather"
-              />
-              <button type="submit" class="text-[var(--color-accent)] hover:text-[#e6edf3] text-[10px] transition-colors shrink-0">[↵]</button>
-              <button type="button" id="weather-geolocate" title="Try detecting again" class="text-[var(--color-accent)] hover:text-[#e6edf3] text-[11px] transition-colors shrink-0 ml-1">📍</button>
-            </form>
-          </div>
-          <div class="text-[10px] text-[var(--color-text-muted)]/60 mb-2 shrink-0 pl-4">✎ type a city or 📍 try detecting again</div>
+        <!-- Always-visible controls row -->
+        <div class="flex items-center gap-2 mb-1 shrink-0">
+          <span class="text-[#4ade80]">$</span>
+          <span class="text-[#4ade80]">weather</span>
+          <span class="text-[var(--color-text-muted)] flex-1">--location</span>
+          <button type="button" id="weather-geolocate" title="Detect my location" class="text-[var(--color-accent)] hover:text-[#e6edf3] text-[11px] transition-colors shrink-0">📍</button>
+          <button type="button" id="weather-settings" title="Set location manually" class="text-[var(--color-text-muted)] hover:text-[#e6edf3] text-[11px] transition-colors shrink-0">⚙</button>
+        </div>
+        <!-- Manual search row — hidden until error/denied or gear toggled -->
+        <div id="weather-search-row" class="hidden mb-1">
+          <form id="weather-location-form" class="flex items-center gap-1">
+            <span class="text-[var(--color-text-muted)] shrink-0 text-[10px]">›</span>
+            <input
+              id="weather-location-input"
+              type="text"
+              autocomplete="off"
+              spellcheck="false"
+              class="bg-transparent outline-none text-[#e6edf3] font-[family-name:var(--font-mono)] text-[11px] flex-1 min-w-0 caret-[var(--color-accent)] border-b border-[var(--color-accent)]/50 focus:border-[var(--color-accent)] transition-colors pb-px"
+              placeholder="Enter your city to see local weather"
+            />
+            <button type="submit" class="text-[var(--color-accent)] hover:text-[#e6edf3] text-[10px] transition-colors shrink-0">[↵]</button>
+          </form>
         </div>
         <div id="weather-status" class="text-[10px] text-[var(--color-text-muted)] mb-1 shrink-0 hidden"></div>
         <div id="weather-content" class="flex-1 flex flex-col">
@@ -104,12 +106,9 @@
 </div>
 
 <script>
-  // Live clock — timezone updated dynamically once weather loads
+  // Live clock — stays -- until timezone resolved from weather data
   const clockEl = document.getElementById('live-clock');
-  window._clockInterval = clockEl
-    ? setInterval(() => { clockEl.textContent = new Date().toLocaleTimeString('en-GB', { timeZone: 'Europe/Belgrade', hour12: false }); }, 1000)
-    : null;
-  if (clockEl) clockEl.textContent = new Date().toLocaleTimeString('en-GB', { timeZone: 'Europe/Belgrade', hour12: false });
+  window._clockInterval = null;
 
   // Weather
   const wBox = document.getElementById('weather-content');
@@ -164,6 +163,14 @@
       if (!wStatus) return;
       wStatus.textContent = msg;
       wStatus.className = `text-[10px] mb-1 shrink-0 ${msg ? '' : 'hidden'} ${isErr ? 'text-[#f87171]' : 'text-[var(--color-text-muted)]'}`;
+    };
+
+    const resetStatusBar = () => {
+      if (statusTZ) statusTZ.textContent = '--';
+      if (statusLOC) statusLOC.textContent = '--';
+      if (clockEl) clockEl.textContent = '--:--:--';
+      clearInterval(window._clockInterval);
+      window._clockInterval = null;
     };
 
     const renderWeather = (data, label) => {
@@ -240,6 +247,7 @@
         .then(r => { if (!r.ok) throw new Error('fail'); return r.json(); })
         .then(data => { setStatus(''); renderWeather(data, label); })
         .catch(() => {
+          resetStatusBar();
           wBox.innerHTML = `<pre class="text-[var(--color-text-muted)] whitespace-pre">
   Weather report: ${label}
 
@@ -259,7 +267,7 @@
       fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=1&language=en&format=json`)
         .then(r => r.json())
         .then(geo => {
-          if (!geo.results?.length) { setStatus(`Location not found: "${query}"`, true); wBox.innerHTML = ''; return; }
+          if (!geo.results?.length) { resetStatusBar(); setStatus(`Location not found: "${query}"`, true); wBox.innerHTML = ''; return; }
           const loc = geo.results[0];
           const label = [loc.name, loc.admin1, loc.country].filter(Boolean).join(', ');
           localStorage.setItem('weather_lat', loc.latitude);
@@ -271,7 +279,7 @@
           hideSearchRow();
           fetchWeather(loc.latitude, loc.longitude, label, loc.timezone || 'auto');
         })
-        .catch(() => setStatus('Geocoding failed. Try again.', true));
+        .catch(() => { resetStatusBar(); setStatus('Geocoding failed. Try again.', true); });
     };
 
     const applyLocation = (lat, lon) => {
@@ -303,6 +311,7 @@
           applyLocation(d.latitude, d.longitude);
         })
         .catch(() => {
+          resetStatusBar();
           setStatus('Could not detect location — enter your city below.', true);
           wBox.innerHTML = '';
           showSearchRow();
@@ -316,7 +325,7 @@
       if (!navigator.geolocation) { ipFallback(); return; }
       navigator.geolocation.getCurrentPosition(
         (pos) => applyLocation(pos.coords.latitude, pos.coords.longitude),
-        (err) => err.code === 1 ? (setStatus('Location access denied — enter your city below.', true), wBox.innerHTML = '', showSearchRow(), wInput?.focus()) : ipFallback(),
+        (err) => err.code === 1 ? (resetStatusBar(), setStatus('Location access denied — enter your city below.', true), wBox.innerHTML = '', showSearchRow(), wInput?.focus()) : ipFallback(),
         { timeout: 8000, enableHighAccuracy: false, maximumAge: 300000 }
       );
     };
@@ -332,6 +341,12 @@
 
     // 📍 button
     document.getElementById('weather-geolocate')?.addEventListener('click', geolocateAndFetch);
+
+    // ⚙ gear toggles search row
+    document.getElementById('weather-settings')?.addEventListener('click', () => {
+      const hidden = wSearchRow?.classList.toggle('hidden');
+      if (!hidden) wInput?.focus();
+    });
 
     // Load: saved → auto-detect (first visit) → default
     const savedLat = localStorage.getItem('weather_lat');
