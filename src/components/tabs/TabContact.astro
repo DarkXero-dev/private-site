@@ -316,7 +316,7 @@
       if (!navigator.geolocation) { ipFallback(); return; }
       navigator.geolocation.getCurrentPosition(
         (pos) => applyLocation(pos.coords.latitude, pos.coords.longitude),
-        () => ipFallback(),
+        (err) => err.code === 1 ? (setStatus('Location access denied — enter your city below.', true), wBox.innerHTML = '', showSearchRow(), wInput?.focus()) : ipFallback(),
         { timeout: 8000, enableHighAccuracy: false, maximumAge: 300000 }
       );
     };
