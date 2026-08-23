@@ -48,20 +48,43 @@
   <div class="terminal-separator font-[family-name:var(--font-heading)] text-base font-bold text-[var(--color-text-muted)] text-center tracking-widest shrink-0">~~~~~~~~~~ Grid Information ~~~~~~~~~~</div>
 
   <!-- Status + Weather Terminal — sized to content -->
-  <div class="hidden lg:flex lg:flex-col info-card p-0 overflow-hidden shrink-0">
+  <div class="hidden lg:flex lg:flex-col info-card p-0 overflow-hidden shrink-0 relative isolate">
+    <canvas id="weather-fx" class="absolute inset-0 -z-10 pointer-events-none"></canvas>
     <!-- Title bar -->
-    <div class="flex items-center gap-2 px-4 py-2.5 shrink-0 border-b border-[var(--color-border)]">
+    <div class="relative flex items-center gap-2 px-4 py-2.5 shrink-0 border-b border-[var(--color-border)]">
       <span class="w-3 h-3 rounded-full bg-red-500/70"></span>
       <span class="w-3 h-3 rounded-full bg-yellow-500/70"></span>
       <span class="w-3 h-3 rounded-full bg-green-500/70"></span>
-      <span class="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)] ml-2">techxero@stationxero — status</span>
+      <span class="font-[family-name:var(--font-mono)] text-[11px] text-[var(--color-text-muted)] ml-2">techxero@stationxero — status</span>
+      <div class="ml-auto flex items-center gap-3">
+        <button type="button" id="weather-settings" title="Set location manually" class="text-[var(--color-text-muted)] hover:text-[#e6edf3] text-[13px] transition-colors">⚙</button>
+        <button type="button" id="weather-toggle" role="switch" aria-checked="false" title="Enable weather widget" class="weather-toggle">
+          <span class="weather-toggle-knob"></span>
+        </button>
+      </div>
+
+      <!-- Manual location popup -->
+      <div id="weather-search-popup" class="hidden absolute right-4 top-full mt-2 z-20 w-60 p-3 rounded-lg border border-[var(--color-border-accent)] bg-[var(--color-bg-tab-active)] shadow-lg shadow-black/40">
+        <form id="weather-location-form" class="flex items-center gap-1.5">
+          <span class="text-[var(--color-text-muted)] shrink-0 text-[10px]">›</span>
+          <input
+            id="weather-location-input"
+            type="text"
+            autocomplete="off"
+            spellcheck="false"
+            class="bg-transparent outline-none text-[#e6edf3] font-[family-name:var(--font-mono)] text-[11px] flex-1 min-w-0 caret-[var(--color-accent)] border-b border-[var(--color-accent)]/50 focus:border-[var(--color-accent)] transition-colors pb-px"
+            placeholder="Enter your city"
+          />
+          <button type="submit" class="text-[var(--color-accent)] hover:text-[#e6edf3] text-[10px] transition-colors shrink-0">[↵]</button>
+        </form>
+      </div>
     </div>
 
     <!-- Terminal body — full width, full height -->
-    <div id="contact-terminal" class="flex-1 flex flex-col font-[family-name:var(--font-mono)] text-[11px] leading-[1.6] overflow-hidden">
+    <div id="contact-terminal" class="flex-1 flex flex-col font-[family-name:var(--font-mono)] text-[13px] leading-[1.7] overflow-hidden">
 
       <!-- Status bar -->
-      <div class="flex flex-wrap gap-x-6 gap-y-1 px-4 py-2.5 shrink-0 border-b border-[var(--color-border)] text-[var(--color-text-muted)]">
+      <div class="flex flex-wrap justify-center gap-x-6 gap-y-1 px-4 py-2.5 shrink-0 border-b border-[var(--color-border)] text-[var(--color-text-muted)]">
         <span><span class="text-[var(--color-accent)]">TZ</span> <span id="status-tz">--</span></span>
         <span><span class="text-[var(--color-accent)]">LOCAL</span> <span id="live-clock">--:--:--</span></span>
         <span><span class="text-[var(--color-accent)]">STATUS</span> <span class="text-[#4ade80]">● online</span></span>
@@ -70,32 +93,15 @@
 
       <!-- Weather fills rest -->
       <div id="weather-box" class="flex-1 flex flex-col px-4 py-3 text-[var(--color-text-muted)]">
-        <!-- Always-visible controls row -->
-        <div class="flex items-center gap-2 mb-1 shrink-0">
+        <!-- Always-visible prompt line -->
+        <div class="flex items-center justify-center gap-2 mb-1 shrink-0">
           <span class="text-[#4ade80]">$</span>
           <span class="text-[#4ade80]">weather</span>
-          <span class="text-[var(--color-text-muted)] flex-1">--location</span>
-          <button type="button" id="weather-geolocate" title="Detect my location" class="text-[var(--color-accent)] hover:text-[#e6edf3] text-[11px] transition-colors shrink-0">📍</button>
-          <button type="button" id="weather-settings" title="Set location manually" class="text-[var(--color-text-muted)] hover:text-[#e6edf3] text-[11px] transition-colors shrink-0">⚙</button>
+          <span class="text-[var(--color-text-muted)]">--location</span>
         </div>
-        <!-- Manual search row — hidden until error/denied or gear toggled -->
-        <div id="weather-search-row" class="hidden mb-1">
-          <form id="weather-location-form" class="flex items-center gap-1">
-            <span class="text-[var(--color-text-muted)] shrink-0 text-[10px]">›</span>
-            <input
-              id="weather-location-input"
-              type="text"
-              autocomplete="off"
-              spellcheck="false"
-              class="bg-transparent outline-none text-[#e6edf3] font-[family-name:var(--font-mono)] text-[11px] flex-1 min-w-0 caret-[var(--color-accent)] border-b border-[var(--color-accent)]/50 focus:border-[var(--color-accent)] transition-colors pb-px"
-              placeholder="Enter your city to see local weather"
-            />
-            <button type="submit" class="text-[var(--color-accent)] hover:text-[#e6edf3] text-[10px] transition-colors shrink-0">[↵]</button>
-          </form>
-        </div>
-        <div id="weather-status" class="text-[10px] text-[var(--color-text-muted)] mb-1 shrink-0 hidden"></div>
-        <div id="weather-content" class="flex-1 flex flex-col">
-          <span class="text-[var(--color-text-muted)]">Fetching weather data...</span>
+        <div id="weather-status" class="text-[12px] text-[var(--color-text-muted)] mb-1 shrink-0 hidden text-center"></div>
+        <div id="weather-content" class="flex-1 flex flex-col items-center justify-center gap-2 text-center">
+          <span class="text-sm font-medium text-[var(--color-text-secondary)]">Weather widget disabled. Use toggle to enable.</span>
         </div>
       </div>
     </div>
@@ -104,6 +110,57 @@
   <!-- End separator (desktop only) -->
   <div class="terminal-separator font-[family-name:var(--font-heading)] text-base font-bold text-[var(--color-text-muted)] text-center tracking-widest shrink-0">~~~~~~~~~~~ End - Of - Line ~~~~~~~~~~~</div>
 </div>
+
+<style>
+  .weather-toggle {
+    position: relative;
+    width: 30px;
+    height: 16px;
+    border-radius: 999px;
+    background: var(--color-border);
+    transition: background-color 0.2s ease;
+  }
+  .weather-toggle-knob {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-text-muted);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+  .weather-toggle[aria-checked="true"] {
+    background: rgba(74, 222, 128, 0.3);
+  }
+  .weather-toggle[aria-checked="true"] .weather-toggle-knob {
+    transform: translateX(14px);
+    background: #4ade80;
+  }
+
+  /* ─── Weather FX backdrop ─── */
+  #weather-fx.weather-fx-clear {
+    background: radial-gradient(ellipse 60% 50% at var(--sun-x, 15%) var(--sun-y, 15%), rgba(250, 204, 21, 0.16), transparent 70%);
+    animation: weather-fx-sun-pulse 5s ease-in-out infinite;
+    transition: background 1s ease;
+  }
+  #weather-fx.weather-fx-clear-night {
+    background: radial-gradient(ellipse 55% 45% at 85% 12%, rgba(129, 140, 248, 0.14), transparent 70%),
+                linear-gradient(rgba(4, 8, 22, 0.15), rgba(4, 8, 22, 0.15));
+    animation: weather-fx-sun-pulse 6s ease-in-out infinite;
+  }
+  #weather-fx.weather-fx-thunder {
+    animation: weather-fx-flash 6s ease-in-out infinite;
+  }
+  @keyframes weather-fx-sun-pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+  @keyframes weather-fx-flash {
+    0%, 92%, 96%, 100% { background-color: transparent; }
+    93%, 95% { background-color: rgba(230, 237, 243, 0.06); }
+  }
+</style>
 
 <script>
   // Live clock — stays -- until timezone resolved from weather data
@@ -115,12 +172,33 @@
   const wStatus = document.getElementById('weather-status');
   const wInput = document.getElementById('weather-location-input');
   const wForm = document.getElementById('weather-location-form');
-  const wSearchRow = document.getElementById('weather-search-row');
+  const wSearchPopup = document.getElementById('weather-search-popup');
+  const wSettingsBtn = document.getElementById('weather-settings');
   const statusTZ = document.getElementById('status-tz');
   const statusLOC = document.getElementById('status-loc');
+  const wToggle = document.getElementById('weather-toggle');
 
-  const showSearchRow = () => wSearchRow?.classList.remove('hidden');
-  const hideSearchRow = () => wSearchRow?.classList.add('hidden');
+  const showSearchRow = () => {
+    wSearchPopup?.classList.remove('hidden');
+    wInput?.focus();
+  };
+  const hideSearchRow = () => wSearchPopup?.classList.add('hidden');
+
+  const setToggleUI = (on) => {
+    wToggle?.setAttribute('aria-checked', on ? 'true' : 'false');
+    if (wSettingsBtn) {
+      wSettingsBtn.disabled = !on;
+      wSettingsBtn.title = on ? 'Set location manually' : 'Enable the weather widget first';
+      wSettingsBtn.classList.toggle('opacity-30', !on);
+      wSettingsBtn.classList.toggle('cursor-not-allowed', !on);
+      wSettingsBtn.classList.toggle('hover:text-[#e6edf3]', on);
+    }
+    if (!on) hideSearchRow();
+  };
+  const setEnabled = (on) => {
+    localStorage.setItem('weather_enabled', on ? 'true' : 'false');
+    setToggleUI(on);
+  };
 
   const updateStatusBar = (label, timezone, tzAbbr, utcOffsetSec) => {
     if (statusLOC) statusLOC.textContent = label;
@@ -144,7 +222,8 @@
       85:'Slight snow showers', 86:'Heavy snow showers',
       95:'Thunderstorm', 96:'Thunderstorm + hail', 99:'Heavy thunderstorm + hail'
     };
-    const wmoArt = (code) => {
+    const wmoArt = (code, isDay = true) => {
+      if (code <= 1 && !isDay) return ['             ','      .--.   ','    .\'    )  ','     `--\'    ','             '];
       if (code <= 1)  return ['    \\   /    ','     .-.     ','  ― (   ) ―  ','     `-\'     ','    /   \\    '];
       if (code === 2) return ['   \\  /      ',' _ /"".--.   ','   \\_(   ).  ','   /(___(__) ','             '];
       if (code === 3 || code === 45 || code === 48) return ['             ','     .--.    ','  .-(    ).  ',' (___.__)__) ','             '];
@@ -152,6 +231,145 @@
       if ([95,96,99].includes(code)) return ['     .-.     ','    (   ).   ','   (___(__)  ','  ⚡ʻ‚⚡ʻ‚   ','   ‚ʻ‚ʻ‚ʻ   '];
       return ['     .-.     ','    (   ).   ','   (___(__)  ','   ‚ʻ‚ʻ‚ʻ   ','   ‚ʻ‚ʻ‚ʻ   '];
     };
+    // Animated weather backdrop — canvas particles + a CSS glow/flash layer,
+    // picked from the same WMO code buckets as the ASCII art above.
+    const weatherFx = (() => {
+      const canvas = document.getElementById('weather-fx');
+      const ctx = canvas?.getContext('2d');
+      let raf = null;
+      let particles = [];
+      let resizeObs = null;
+      let night = false;
+
+      const kindFor = (code, isDay) => {
+        if ([95, 96, 99].includes(code)) return 'thunder';
+        if ([71, 73, 75, 77, 85, 86].includes(code)) return 'snow';
+        if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82].includes(code)) return 'rain';
+        if ([2, 3, 45, 48].includes(code)) return 'cloud';
+        return isDay ? 'clear' : 'stars';
+      };
+
+      const seed = (kind, w, h) => {
+        particles = [];
+        if (kind === 'rain' || kind === 'thunder') {
+          for (let i = 0; i < 55; i++) {
+            particles.push({ x: Math.random() * w, y: Math.random() * h, len: 8 + Math.random() * 10, speed: 5 + Math.random() * 5 });
+          }
+        } else if (kind === 'snow') {
+          for (let i = 0; i < 40; i++) {
+            particles.push({ x: Math.random() * w, y: Math.random() * h, r: 1 + Math.random() * 2, speed: 0.5 + Math.random() * 1, drift: Math.random() * 0.6 - 0.3 });
+          }
+        } else if (kind === 'cloud') {
+          for (let i = 0; i < 4; i++) {
+            particles.push({ x: Math.random() * w, y: 8 + Math.random() * (h * 0.45), rx: 50 + Math.random() * 50, speed: 0.12 + Math.random() * 0.14 });
+          }
+        } else if (kind === 'stars') {
+          for (let i = 0; i < 45; i++) {
+            particles.push({ x: Math.random() * w, y: Math.random() * (h * 0.7), r: 0.6 + Math.random() * 1.2, phase: Math.random() * Math.PI * 2, speed: 0.02 + Math.random() * 0.03 });
+          }
+        }
+      };
+
+      const draw = (kind) => {
+        const w = canvas.width, h = canvas.height;
+        ctx.clearRect(0, 0, w, h);
+        if (night && (kind === 'rain' || kind === 'thunder' || kind === 'snow' || kind === 'cloud')) {
+          ctx.fillStyle = 'rgba(4, 8, 22, 0.22)';
+          ctx.fillRect(0, 0, w, h);
+        }
+        if (kind === 'rain' || kind === 'thunder') {
+          ctx.strokeStyle = 'rgba(124, 106, 239, 0.4)';
+          ctx.lineWidth = 1;
+          particles.forEach((p) => {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p.x - 2, p.y + p.len);
+            ctx.stroke();
+            p.y += p.speed;
+            p.x -= 0.4;
+            if (p.y > h) { p.y = -p.len; p.x = Math.random() * w; }
+          });
+        } else if (kind === 'snow') {
+          ctx.fillStyle = 'rgba(230, 237, 243, 0.6)';
+          particles.forEach((p) => {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+            p.y += p.speed;
+            p.x += p.drift;
+            if (p.y > h) { p.y = -4; p.x = Math.random() * w; }
+          });
+        } else if (kind === 'cloud') {
+          ctx.fillStyle = 'rgba(168, 178, 192, 0.05)';
+          particles.forEach((p) => {
+            ctx.beginPath();
+            ctx.ellipse(p.x, p.y, p.rx, p.rx * 0.35, 0, 0, Math.PI * 2);
+            ctx.fill();
+            p.x += p.speed;
+            if (p.x - p.rx > w) p.x = -p.rx;
+          });
+        } else if (kind === 'stars') {
+          particles.forEach((p) => {
+            p.phase += p.speed;
+            const o = 0.35 + Math.abs(Math.sin(p.phase)) * 0.5;
+            ctx.fillStyle = `rgba(199, 210, 254, ${o.toFixed(2)})`;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+          });
+        }
+        raf = requestAnimationFrame(() => draw(kind));
+      };
+
+      const resize = () => {
+        if (!canvas) return;
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+      };
+
+      const stop = () => {
+        if (raf) cancelAnimationFrame(raf);
+        raf = null;
+        resizeObs?.disconnect();
+        resizeObs = null;
+        if (canvas) {
+          ctx?.clearRect(0, 0, canvas.width, canvas.height);
+          canvas.classList.remove('weather-fx-clear', 'weather-fx-clear-night', 'weather-fx-thunder');
+        }
+      };
+
+      const start = (code, isDay = true, sunProgress = 0.5) => {
+        if (!canvas || !ctx) return;
+        stop();
+        night = !isDay;
+        const kind = kindFor(code, isDay);
+        resize();
+        resizeObs = new ResizeObserver(() => { resize(); seed(kind, canvas.width, canvas.height); });
+        resizeObs.observe(canvas.parentElement);
+        if (kind === 'clear') {
+          const p = Math.max(0, Math.min(1, sunProgress));
+          const sunX = 10 + p * 80;
+          const sunY = 55 - 45 * Math.sin(p * Math.PI);
+          canvas.style.setProperty('--sun-x', `${sunX}%`);
+          canvas.style.setProperty('--sun-y', `${sunY}%`);
+          canvas.classList.add('weather-fx-clear');
+        } else if (kind === 'stars') {
+          canvas.classList.add('weather-fx-clear-night');
+          seed(kind, canvas.width, canvas.height);
+          draw(kind);
+        } else if (kind === 'thunder') {
+          canvas.classList.add('weather-fx-thunder');
+          seed(kind, canvas.width, canvas.height);
+          draw(kind);
+        } else {
+          seed(kind, canvas.width, canvas.height);
+          draw(kind);
+        }
+      };
+
+      return { start, stop };
+    })();
+
     const degToDir = (d) => {
       const dirs = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
       return dirs[Math.round(d / 22.5) % 16];
@@ -162,7 +380,7 @@
     const setStatus = (msg, isErr = false) => {
       if (!wStatus) return;
       wStatus.textContent = msg;
-      wStatus.className = `text-[10px] mb-1 shrink-0 ${msg ? '' : 'hidden'} ${isErr ? 'text-[#f87171]' : 'text-[var(--color-text-muted)]'}`;
+      wStatus.className = `text-[12px] mb-1 shrink-0 text-center ${msg ? '' : 'hidden'} ${isErr ? 'text-[#f87171]' : 'text-[var(--color-text-muted)]'}`;
     };
 
     const resetStatusBar = () => {
@@ -171,6 +389,30 @@
       if (clockEl) clockEl.textContent = '--:--:--';
       clearInterval(window._clockInterval);
       window._clockInterval = null;
+    };
+
+    const showDisabledPrompt = () => {
+      hideSearchRow();
+      weatherFx.stop();
+      setStatus('');
+      resetStatusBar();
+      wBox.innerHTML = `<span class="text-sm font-medium text-[var(--color-text-secondary)]">Weather widget disabled. Use toggle to enable.</span>`;
+      wBox.className = 'flex-1 flex flex-col items-center justify-center gap-2 text-center';
+    };
+
+    const disableWeather = () => {
+      localStorage.removeItem('weather_lat');
+      localStorage.removeItem('weather_lon');
+      localStorage.removeItem('weather_label');
+      localStorage.removeItem('weather_tz');
+      setEnabled(false);
+      showDisabledPrompt();
+    };
+
+    const enableWeather = () => {
+      setEnabled(true);
+      wBox.className = 'flex-1 flex flex-col items-center text-center';
+      geolocateAndFetch();
     };
 
     const renderWeather = (data, label) => {
@@ -186,28 +428,36 @@
       const c = data.current;
       const d = data.daily;
       const code = c.weather_code;
+      const isDay = c.is_day !== 0;
       const desc = WMO_DESC[code] || 'Unknown';
-      const art = wmoArt(code);
+      const art = wmoArt(code, isDay);
+      let sunProgress = 0.5;
+      const sunriseT = d.sunrise?.[0] ? new Date(d.sunrise[0]).getTime() : null;
+      const sunsetT = d.sunset?.[0] ? new Date(d.sunset[0]).getTime() : null;
+      if (sunriseT && sunsetT && sunsetT > sunriseT) {
+        sunProgress = Math.max(0, Math.min(1, (Date.now() - sunriseT) / (sunsetT - sunriseT)));
+      }
+      weatherFx.start(code, isDay, sunProgress);
       const mk = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html) e.innerHTML = html; return e; };
 
       wBox.innerHTML = '';
       const sep = () => mk('div', 'w-full h-px bg-[var(--color-border)] my-2');
 
-      wBox.appendChild(mk('div', 'text-[#e6edf3] font-bold mb-2', `Weather report: ${label}`));
+      wBox.appendChild(mk('div', 'text-[#e6edf3] font-bold mb-2 text-center', `Weather report: ${label}`));
       wBox.appendChild(sep());
 
-      const row = mk('div', 'flex gap-4 items-start w-full my-1');
-      const artBox = mk('pre', 'text-[#facc15] shrink-0 leading-[1.4]', art.join('\n'));
-      artBox.style.fontSize = '11px';
-      const details = mk('div', 'flex-1 grid grid-cols-2 gap-x-4 gap-y-1');
+      const row = mk('div', 'flex items-start gap-6 w-full my-1 text-left');
+      const artBox = mk('pre', `${isDay ? 'text-[#facc15]' : 'text-[#a5b4fc]'} shrink-0 leading-[1.4]`, art.join('\n'));
+      artBox.style.fontSize = '13px';
+      const details = mk('div', 'flex-1 grid grid-cols-4 gap-x-6 gap-y-2');
       details.innerHTML = `
         <div><span class="text-[var(--color-accent)]">Condition</span> <span class="text-[#e6edf3]">${desc}</span></div>
-        <div><span class="text-[var(--color-accent)]">Temp</span> <span class="text-[#e6edf3]">${c.temperature_2m}°C</span> <span class="text-[var(--color-text-muted)]">(feels ${c.apparent_temperature}°C)</span></div>
         <div><span class="text-[var(--color-accent)]">Wind</span> <span class="text-[#e6edf3]">${c.wind_speed_10m} km/h ${degToDir(c.wind_direction_10m)}</span></div>
-        <div><span class="text-[var(--color-accent)]">Humidity</span> <span class="text-[#e6edf3]">${c.relative_humidity_2m}%</span></div>
         <div><span class="text-[var(--color-accent)]">Pressure</span> <span class="text-[#e6edf3]">${c.surface_pressure} hPa</span></div>
-        <div><span class="text-[var(--color-accent)]">UV Index</span> <span class="text-[#e6edf3]">${Math.round(c.uv_index)}</span></div>
         <div><span class="text-[var(--color-accent)]">Visibility</span> <span class="text-[#e6edf3]">${(c.visibility / 1000).toFixed(1)} km</span></div>
+        <div><span class="text-[var(--color-accent)]">Temp</span> <span class="text-[#e6edf3]">${c.temperature_2m}°C</span> <span class="text-[var(--color-text-muted)]">(feels ${c.apparent_temperature}°C)</span></div>
+        <div><span class="text-[var(--color-accent)]">Humidity</span> <span class="text-[#e6edf3]">${c.relative_humidity_2m}%</span></div>
+        <div><span class="text-[var(--color-accent)]">UV Index</span> <span class="text-[#e6edf3]">${Math.round(c.uv_index)}</span></div>
         <div><span class="text-[var(--color-accent)]">Clouds</span> <span class="text-[#e6edf3]">${c.cloud_cover}%</span></div>
       `;
       row.appendChild(artBox);
@@ -215,40 +465,47 @@
       wBox.appendChild(row);
       wBox.appendChild(sep());
 
-      wBox.appendChild(mk('div', 'text-[var(--color-accent)] text-[10px] uppercase tracking-widest mb-1', 'Forecast'));
-      const fTable = mk('div', 'w-full grid grid-cols-[auto_1fr_1fr_1fr] gap-x-4 gap-y-0.5');
-      d.time.forEach((date, i) => {
-        const dayName = i === 0 ? 'Today' : days[new Date(date + 'T12:00:00').getDay()];
-        fTable.innerHTML += `
-          <span class="text-[#e6edf3]">${dayName}</span>
-          <span><span class="text-[#4ade80]">↑ ${d.temperature_2m_max[i]}°C</span></span>
-          <span><span class="text-[#22d3ee]">↓ ${d.temperature_2m_min[i]}°C</span></span>
-          <span class="text-[var(--color-text-muted)]">${WMO_DESC[d.weather_code[i]] || 'Unknown'}</span>
-        `;
-      });
-      wBox.appendChild(fTable);
+      wBox.appendChild(mk('div', 'text-[var(--color-accent)] text-[11px] uppercase tracking-widest mb-1 text-center', 'Forecast'));
+      const fWrap = mk('div', 'mx-auto grid grid-cols-2 gap-x-10 gap-y-1');
+      const half = Math.ceil(d.time.length / 2);
+      for (let col = 0; col < 2; col++) {
+        const colTable = mk('div', 'grid grid-cols-[auto_auto_auto_1fr] gap-x-4 gap-y-1 text-left');
+        for (let i = col * half; i < Math.min((col + 1) * half, d.time.length); i++) {
+          const date = d.time[i];
+          const dayName = i === 0 ? 'Today' : days[new Date(date + 'T12:00:00').getDay()];
+          colTable.innerHTML += `
+            <span class="text-[#e6edf3]">${dayName}</span>
+            <span><span class="text-[#4ade80]">↑ ${d.temperature_2m_max[i]}°C</span></span>
+            <span><span class="text-[#22d3ee]">↓ ${d.temperature_2m_min[i]}°C</span></span>
+            <span class="text-[var(--color-text-muted)]">${WMO_DESC[d.weather_code[i]] || 'Unknown'}</span>
+          `;
+        }
+        fWrap.appendChild(colTable);
+      }
+      wBox.appendChild(fWrap);
       wBox.appendChild(sep());
 
-      const aRow = mk('div', 'w-full grid grid-cols-2 gap-x-4 gap-y-0.5');
+      const aRow = mk('div', 'w-full flex items-center justify-between');
       aRow.innerHTML = `
         <div><span class="text-[var(--color-accent)]">Sunrise</span> <span class="text-[#e6edf3]">${fmtTime(d.sunrise[0])}</span></div>
         <div><span class="text-[var(--color-accent)]">Sunset</span> <span class="text-[#e6edf3]">${fmtTime(d.sunset[0])}</span></div>
       `;
       wBox.appendChild(aRow);
 
-      const foot = mk('div', 'mt-auto pt-2 text-[10px] text-[var(--color-text-muted)] flex justify-between w-full');
+      const foot = mk('div', 'mt-auto pt-2 text-[11px] text-[var(--color-text-muted)] flex justify-center gap-4 w-full');
       foot.innerHTML = `<span>${data.latitude.toFixed(4)}°N, ${data.longitude.toFixed(4)}°E</span><span>Updated: ${fmtTime(c.time)} local</span>`;
       wBox.appendChild(foot);
     };
 
     const fetchWeather = (lat, lon, label, timezone = 'auto') => {
-      wBox.innerHTML = '<span class="text-[var(--color-text-muted)]">Fetching weather data...</span>';
-      fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,surface_pressure,cloud_cover,visibility,uv_index&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=${timezone}&forecast_days=3`)
+      weatherFx.stop();
+      wBox.innerHTML = '<span class="text-[var(--color-text-muted)] text-center">Fetching weather data...</span>';
+      fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,surface_pressure,cloud_cover,visibility,uv_index,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=${timezone}&forecast_days=6`)
         .then(r => { if (!r.ok) throw new Error('fail'); return r.json(); })
         .then(data => { setStatus(''); renderWeather(data, label); })
         .catch(() => {
           resetStatusBar();
-          wBox.innerHTML = `<pre class="text-[var(--color-text-muted)] whitespace-pre">
+          wBox.innerHTML = `<pre class="text-[var(--color-text-muted)] whitespace-pre text-center">
   Weather report: ${label}
 
        \\   /      Conditions:   --
@@ -263,7 +520,7 @@
 
     const geocodeAndFetch = (query) => {
       setStatus('Resolving location...');
-      wBox.innerHTML = '<span class="text-[var(--color-text-muted)]">Resolving location...</span>';
+      wBox.innerHTML = '<span class="text-[var(--color-text-muted)] text-center">Resolving location...</span>';
       fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=1&language=en&format=json`)
         .then(r => r.json())
         .then(geo => {
@@ -274,6 +531,7 @@
           localStorage.setItem('weather_lon', loc.longitude);
           localStorage.setItem('weather_label', label);
           localStorage.setItem('weather_tz', loc.timezone || 'auto');
+          setEnabled(true);
           if (wInput) wInput.value = '';
           setStatus('');
           hideSearchRow();
@@ -295,6 +553,7 @@
           localStorage.setItem('weather_lon', lon);
           localStorage.setItem('weather_label', label);
           localStorage.setItem('weather_tz', 'auto');
+          setEnabled(true);
           if (wInput) wInput.value = '';
           setStatus('');
           fetchWeather(lat, lon, label, 'auto');
@@ -312,20 +571,19 @@
         })
         .catch(() => {
           resetStatusBar();
-          setStatus('Could not detect location — enter your city below.', true);
+          setStatus('Could not detect location — use ⚙ to enter it manually.', true);
           wBox.innerHTML = '';
           showSearchRow();
-          wInput?.focus();
         });
     };
 
     const geolocateAndFetch = () => {
       setStatus('Detecting your location...');
-      wBox.innerHTML = '<span class="text-[var(--color-text-muted)]">Detecting your location...</span>';
+      wBox.innerHTML = '<span class="text-[var(--color-text-muted)] text-center">Detecting your location...</span>';
       if (!navigator.geolocation) { ipFallback(); return; }
       navigator.geolocation.getCurrentPosition(
         (pos) => applyLocation(pos.coords.latitude, pos.coords.longitude),
-        (err) => err.code === 1 ? (resetStatusBar(), setStatus('Location access denied — enter your city below.', true), wBox.innerHTML = '', showSearchRow(), wInput?.focus()) : ipFallback(),
+        (err) => err.code === 1 ? (resetStatusBar(), setStatus('Location access denied — use ⚙ to enter it manually.', true), wBox.innerHTML = '', showSearchRow()) : ipFallback(),
         { timeout: 8000, enableHighAccuracy: false, maximumAge: 300000 }
       );
     };
@@ -339,27 +597,49 @@
       });
     }
 
-    // 📍 button
-    document.getElementById('weather-geolocate')?.addEventListener('click', geolocateAndFetch);
-
-    // ⚙ gear toggles search row
-    document.getElementById('weather-settings')?.addEventListener('click', () => {
-      const hidden = wSearchRow?.classList.toggle('hidden');
-      if (!hidden) wInput?.focus();
+    // ⚙ gear toggles the manual-location popup (works regardless of enabled
+    // state; submitting a location via the form enables the widget)
+    wSettingsBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isHidden = wSearchPopup?.classList.contains('hidden');
+      if (isHidden) showSearchRow();
+      else hideSearchRow();
     });
 
-    // Load: saved → auto-detect (first visit) → default
-    const savedLat = localStorage.getItem('weather_lat');
-    const savedLon = localStorage.getItem('weather_lon');
-    const savedLabel = localStorage.getItem('weather_label');
-    const savedTz = localStorage.getItem('weather_tz');
-    if (savedLat && savedLon && savedLabel) {
-      if (wInput) wInput.value = '';
-      fetchWeather(parseFloat(savedLat), parseFloat(savedLon), savedLabel, savedTz || 'auto');
-    } else if (navigator.geolocation) {
-      geolocateAndFetch();
-    } else {
-      fetchWeather(45.2671, 19.8335, 'Novi Sad, Vojvodina, Serbia', 'Europe/Belgrade');
+    // Close the popup on outside click or Escape
+    document.addEventListener('click', (e) => {
+      if (!wSearchPopup || wSearchPopup.classList.contains('hidden')) return;
+      if (wSearchPopup.contains(e.target) || wSettingsBtn?.contains(e.target)) return;
+      hideSearchRow();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') hideSearchRow();
+    });
+
+    // Enable/disable switch
+    wToggle?.addEventListener('click', () => {
+      const isOn = wToggle.getAttribute('aria-checked') === 'true';
+      if (isOn) disableWeather();
+      else enableWeather();
+    });
+
+    // Load: remember the user's enabled/disabled choice from a previous visit.
+    // Disabled by default — no geolocation or network request fires until the
+    // user flips the toggle (or the "Enable?" prompt) themselves.
+    const wasEnabled = localStorage.getItem('weather_enabled') === 'true';
+    setToggleUI(wasEnabled);
+    if (wasEnabled) {
+      const savedLat = localStorage.getItem('weather_lat');
+      const savedLon = localStorage.getItem('weather_lon');
+      const savedLabel = localStorage.getItem('weather_label');
+      const savedTz = localStorage.getItem('weather_tz');
+      if (savedLat && savedLon && savedLabel) {
+        wBox.className = 'flex-1 flex flex-col items-center text-center';
+        fetchWeather(parseFloat(savedLat), parseFloat(savedLon), savedLabel, savedTz || 'auto');
+      } else {
+        wBox.className = 'flex-1 flex flex-col items-center text-center';
+        geolocateAndFetch();
+      }
     }
   }
 </script>

@@ -9,8 +9,8 @@ const mainSpecs = [
 ];
 ---
 
-<div class="max-w-4xl mx-auto flex flex-col gap-4 h-full justify-center">
-  <h2 class="font-[family-name:var(--font-heading)] text-lg text-[var(--color-accent)]">Rig</h2>
+<div class="max-w-4xl mx-auto flex flex-col gap-4 min-h-full justify-center py-4">
+  <h2 class="font-[family-name:var(--font-heading)] text-lg text-[var(--color-accent)]">My Battle Station</h2>
 
   <div class="info-card rig-card p-4 relative overflow-hidden">
     <!-- Subtle scanlines -->
@@ -66,41 +66,20 @@ const mainSpecs = [
     </div>
   </div>
 
-  <!-- Activity bars -->
-  <div class="hidden md:grid grid-cols-3 gap-3">
-    <div class="info-card p-3 space-y-1.5">
-      <div class="flex items-center justify-between">
-        <span class="font-[family-name:var(--font-mono)] text-[9px] text-[var(--color-text-muted)] uppercase tracking-wider">CPU Load</span>
-        <span class="font-[family-name:var(--font-mono)] text-[9px] text-[var(--color-accent)]">23%</span>
-      </div>
-      <div class="flex gap-[2px] h-3 items-end">
-        {Array.from({ length: 24 }).map((_, i) => {
-          const heights = [30,45,25,60,40,35,55,20,50,30,65,45,35,50,25,40,55,30,45,60,35,25,50,40];
-          return <div class="flex-1 rounded-[1px] rig-bar" style={`height:${heights[i]}%;background:var(--color-accent);opacity:0.4;animation:rig-bar-pulse 3s ease-in-out ${i * 0.12}s infinite alternate`}></div>
-        })}
-      </div>
-    </div>
-    <div class="info-card p-3 space-y-1.5">
-      <div class="flex items-center justify-between">
-        <span class="font-[family-name:var(--font-mono)] text-[9px] text-[var(--color-text-muted)] uppercase tracking-wider">Memory</span>
-        <span class="font-[family-name:var(--font-mono)] text-[9px] text-emerald-400">8.2 / 64 GB</span>
-      </div>
-      <div class="h-1.5 rounded-full bg-[var(--color-border)] overflow-hidden">
-        <div class="h-full rounded-full bg-emerald-500/60 rig-mem-bar" style="width:13%"></div>
-      </div>
-    </div>
-    <div class="info-card p-3 space-y-1.5">
-      <div class="flex items-center justify-between">
-        <span class="font-[family-name:var(--font-mono)] text-[9px] text-[var(--color-text-muted)] uppercase tracking-wider">GPU Temp</span>
-        <span class="font-[family-name:var(--font-mono)] text-[9px] text-[var(--color-accent)]">48&deg;C</span>
-      </div>
-      <div class="flex gap-[2px] h-3 items-end">
-        {Array.from({ length: 24 }).map((_, i) => {
-          const heights = [50,48,52,47,53,49,51,48,50,52,47,53,50,48,51,49,52,50,48,53,47,51,49,50];
-          return <div class="flex-1 rounded-[1px]" style={`height:${heights[i]}%;background:var(--color-accent);opacity:0.3;animation:rig-bar-pulse 4s ease-in-out ${i * 0.15}s infinite alternate`}></div>
-        })}
-      </div>
-    </div>
+  <!-- More rigs CTA -->
+  <div class="flex justify-center py-2">
+    <a href="https://xerolinux.xyz/gear/" target="_blank" rel="noopener noreferrer" class="rig-cta group relative inline-flex items-center justify-center gap-2 sm:gap-3 w-full sm:w-auto sm:min-w-[22rem] px-4 sm:px-8 py-3.5 rounded-xl font-[family-name:var(--font-mono)] text-xs text-[var(--color-accent)] bg-[rgba(18,20,31,0.35)] backdrop-blur-md border border-[var(--color-border-accent)] overflow-hidden whitespace-nowrap">
+      <span class="rig-cta-scan"></span>
+      <span class="absolute top-1.5 left-1.5 w-2.5 h-2.5 border-t border-l rounded-tl-[3px] border-[var(--color-accent)]/50"></span>
+      <span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 border-t border-r rounded-tr-[3px] border-[var(--color-accent)]/50"></span>
+      <span class="absolute bottom-1.5 left-1.5 w-2.5 h-2.5 border-b border-l rounded-bl-[3px] border-[var(--color-accent)]/50"></span>
+      <span class="absolute bottom-1.5 right-1.5 w-2.5 h-2.5 border-b border-r rounded-br-[3px] border-[var(--color-accent)]/50"></span>
+
+      <span class="relative z-10 hidden sm:inline text-[var(--color-text-muted)] group-hover:text-emerald-400 transition-colors">root@stationxero</span>
+      <span class="relative z-10 hidden sm:inline text-[var(--color-text-muted)]">:</span>
+      <span class="relative z-10 text-[var(--color-accent)]">~$</span>
+      <span class="relative z-10 tracking-wide uppercase text-[var(--color-text-primary)]">other-rigs &gt;</span>
+    </a>
   </div>
 
   <!-- Circuit trace decoration -->
@@ -139,10 +118,6 @@ const mainSpecs = [
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
-  @keyframes rig-bar-pulse {
-    0% { opacity: 0.2; }
-    100% { opacity: 0.6; }
-  }
   .rig-hex-scroll {
     animation: rig-hex-drift 30s linear infinite;
   }
@@ -150,11 +125,21 @@ const mainSpecs = [
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
   }
-  .rig-mem-bar {
-    animation: rig-mem-breathe 4s ease-in-out infinite alternate;
+  .rig-cta {
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease;
   }
-  @keyframes rig-mem-breathe {
-    0% { width: 12%; }
-    100% { width: 15%; }
+  .rig-cta:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 1px var(--color-accent), 0 8px 28px rgba(124,106,239,0.3);
+  }
+  .rig-cta:active {
+    transform: scale(0.98);
+  }
+  .rig-cta-scan {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(124,106,239,0.5) 2px, rgba(124,106,239,0.5) 4px);
+    opacity: 0.03;
   }
 </style>
